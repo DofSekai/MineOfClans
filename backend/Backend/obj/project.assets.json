@@ -107,6 +107,43 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Backend.Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Backend.Common": "1.0.0",
+          "Business.Database": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Backend.Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Backend.Business.dll": {}
+        }
+      },
+      "Backend.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Backend.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Backend.Common.dll": {}
+        }
+      },
+      "Business.Database/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Backend.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Business.Database.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Business.Database.dll": {}
+        }
       }
     }
   },
@@ -451,10 +488,28 @@
         "swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "Backend.Business/1.0.0": {
+      "type": "project",
+      "path": "../Backend.Business/Backend.Business.csproj",
+      "msbuildProject": "../Backend.Business/Backend.Business.csproj"
+    },
+    "Backend.Common/1.0.0": {
+      "type": "project",
+      "path": "../Backend.Common/Backend.Common.csproj",
+      "msbuildProject": "../Backend.Common/Backend.Common.csproj"
+    },
+    "Business.Database/1.0.0": {
+      "type": "project",
+      "path": "../Business.Database/Business.Database.csproj",
+      "msbuildProject": "../Business.Database/Business.Database.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Backend.Business >= 1.0.0",
+      "Backend.Common >= 1.0.0",
+      "Business.Database >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.5",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -483,7 +538,17 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\catez\\Desktop\\MineOfClans\\backend\\Backend.Business\\Backend.Business.csproj": {
+              "projectPath": "C:\\Users\\catez\\Desktop\\MineOfClans\\backend\\Backend.Business\\Backend.Business.csproj"
+            },
+            "C:\\Users\\catez\\Desktop\\MineOfClans\\backend\\Backend.Common\\Backend.Common.csproj": {
+              "projectPath": "C:\\Users\\catez\\Desktop\\MineOfClans\\backend\\Backend.Common\\Backend.Common.csproj"
+            },
+            "C:\\Users\\catez\\Desktop\\MineOfClans\\backend\\Business.Database\\Business.Database.csproj": {
+              "projectPath": "C:\\Users\\catez\\Desktop\\MineOfClans\\backend\\Business.Database\\Business.Database.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
