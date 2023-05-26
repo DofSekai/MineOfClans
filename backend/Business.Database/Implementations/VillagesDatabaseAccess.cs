@@ -19,7 +19,7 @@ namespace Business.Database.Implementations {
         }
 
         public async Task Create(Village village) {
-            _databaseContext.village.Add(village);
+            _databaseContext.villages.Add(village);
             await _databaseContext.SaveChangesAsync();
         }
     }
