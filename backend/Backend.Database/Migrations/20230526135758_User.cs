@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Business.Database.Migrations
+namespace Backend.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class User : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +18,9 @@ namespace Business.Database.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "varchar", maxLength: 255, nullable: false)
+                    Name = table.Column<string>(type: "varchar", maxLength: 255, nullable: false),
+                    Level = table.Column<int>(type: "integer", nullable: false, defaultValue: 1),
+                    LastUpdate = table.Column<DateTime>(type: "timestamp", nullable: false)
                 },
                 constraints: table =>
                 {
