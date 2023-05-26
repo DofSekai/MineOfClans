@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  text-align: center;
+  font-weight: bold;
+  
+}
+
+.button-log{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menu-left{
+  width: 45%;
+  display: inline-block;
+  justify-content: left;
+  border-right: solid;
+  margin: auto;
+
+}
+
+.menu-left p {
+  margin-left: 10px;
+}
+
+
+.main{
+  width: 45%;
+  display: inline-block;
+  justify-content: right;
+}
+
+.global {
+  border-style: solid;
+}
