@@ -1,9 +1,9 @@
 using Backend.Business.Implementations;
 using Backend.Business.Interfaces;
 using Backend.Common;
-using Business.Database;
-using Business.Database.Implementations;
-using Business.Database.Interfaces;
+using Backend.Database;
+using Backend.Database.Implementations;
+using Backend.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
