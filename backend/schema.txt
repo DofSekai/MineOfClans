@@ -1,0 +1,15 @@
+Users -> (id, name) => (1, Jerem)
+
+
+Villages -> (id, irons, diamonds, emeralds, wall_level, golem_level, lastupdate) => (1, 30, 20, 10, 0, 0, maintenant)
+
+
+Levels -> (id, iron_rate, diamond_rate, emerald_rate, max_rate) -> (1,  5,  3, 1,  20)
+                                                                   (2, 10,  6, 2,  40)
+                                                                   (3, 15,  9, 3,  60)
+                                                                   (4, 20, 12, 4,  80)
+                                                                   (5, 25, 15, 5, 100)
+
+
+user_village -> (user_id, village_id)
+level_village -> (level_id, village_id)
