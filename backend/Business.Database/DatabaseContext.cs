@@ -27,6 +27,9 @@ namespace Business.Database {
                 .HasMaxLength(255)
                 .IsUnicode(true)
                 .HasColumnType("varchar");
+            userBuilder.Property(x => x.Level)
+                .HasColumnType("integer")
+                .HasDefaultValue(1);
 
             userBuilder.HasIndex(x => x.Name).IsUnique();
         }

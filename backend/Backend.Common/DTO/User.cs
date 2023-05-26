@@ -2,6 +2,7 @@
     public class User {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Level { get; set; }
     }
     
     public static class GameDAOtoDTOHelper {
@@ -9,6 +10,7 @@
             return new DTO.User() {
                 Id = originalUser.Id,
                 Name = originalUser.Name,
+                Level = originalUser.Level
             };
         }
 
@@ -16,6 +18,7 @@
             return new DAO.User() {
                 Id = originalUser.Id,
                 Name = originalUser.Name,
+                Level = originalUser.Level
             };
         }
     }

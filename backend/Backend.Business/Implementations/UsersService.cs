@@ -53,7 +53,7 @@ namespace Backend.Business.Implementations {
 
         public async Task Create(User user) {
             if (user == null) {
-                throw new ArgumentException("Game object is invalid !");
+                throw new ArgumentException("User object is invalid !");
             }
 
             if (string.IsNullOrWhiteSpace(user.Name)) {
