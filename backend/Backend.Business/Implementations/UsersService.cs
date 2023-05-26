@@ -25,24 +25,48 @@ namespace Backend.Business.Implementations {
             } catch (Exception e) {
                 _logger.LogError(e.Message);
                 _logger.LogError(e.StackTrace);
+                throw;
+            }
+        }
+
+        public async Task<User?> GetById(int id) {
+            try {
+                var data = await _usersDataAccess.GetById(id);
+                return data?.ToDto();
+            } catch (Exception e) {
+                _logger.LogError(e.Message);
+                _logger.LogError(e.StackTrace);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<User>> SearchByName(string name) {
+            try {
+                return (await _usersDataAccess.SearchByName(name)).Select(x => x.ToDto());
+            } catch (Exception e) {
+                _logger.LogError(e.Message);
+                _logger.LogError(e.StackTrace);
 
                 throw;
             }
         }
 
-        public Task<User?> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task Create(User user) {
+            if (user == null) {
+                throw new ArgumentException("Game object is invalid !");
+            }
 
-        public Task<IEnumerable<User>> SearchByName(string name)
-        {
-            throw new NotImplementedException();
-        }
+            if (string.IsNullOrWhiteSpace(user.Name)) {
+                throw new ArgumentException("Name is empty !");
+            }
 
-        public Task Create(User user)
-        {
-            throw new NotImplementedException();
+            try {
+                await _usersDataAccess.Create(user.ToDAO());
+            } catch (Exception e) {
+                _logger.LogError(e.Message);
+                _logger.LogError(e.StackTrace);
+                throw;
+            }
         }
     }
 }
