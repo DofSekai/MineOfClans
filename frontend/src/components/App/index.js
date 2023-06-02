@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 //import 'tailwindcss/tailwind.css';
 import './index.css';
 //import Game from '../Game';
+import logo from "../../img/logo.png"
 
 export default function App() {
   return (
@@ -9,7 +10,11 @@ export default function App() {
             <br></br>
             <hr></hr>
             <br></br>
-            <h1 className="font-bold text-center text-3xl">MineOfClans</h1>
+            
+            <div class="flex items-center justify-center">
+              <img src={logo} alt="Logo" class="w-44 h-44 rounded-full mr-2"></img>
+                {/*<h1 class="font-bold text-3xl">MineOfClans</h1>*/}            
+            </div>
             <br></br>
             <hr></hr>
             <div class="p-9 flex justify-center space-x-2">

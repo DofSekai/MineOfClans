@@ -5,6 +5,7 @@ import App from './components/App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
+import Game from './components/Game';
 
 const route = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const route = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/game",
+    element: <Game />
   }
 ]);
 
