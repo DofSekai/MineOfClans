@@ -1,6 +1,33 @@
+using Backend.Business.Implementations;
+using Backend.Business.Interfaces;
+using Backend.Common;
+using Business.Database;
+using Business.Database.Implementations;
+using Business.Database.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var rawConfig = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddEnvironmentVariables()
+    .AddJsonFile("appsettings.json")
+    .AddUserSecrets<Program>()
+    .Build();
+
+var appSettingsSection = rawConfig.GetSection("AppSettings");
+builder.Services.Configure<AppSettings>(appSettingsSection);
+
+builder.Services.AddHealthChecks().AddNpgSql(appSettingsSection["ConnectionString"]);
+
 // Add services to the container.
+builder.Services.AddTransient<DatabaseContext>();
+
+// Services
+builder.Services.AddTransient<IUsersService, UsersService>();
+
+// Data
+builder.Services.AddTransient<IUsersDataAccess, UsersDatabaseAccess>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -21,5 +48,12 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope()) {
+    var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+
+    // Here is the migration executed
+    dbContext.Database.Migrate();
+}
 
 app.Run();
