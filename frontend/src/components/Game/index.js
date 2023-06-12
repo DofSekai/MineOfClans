@@ -3,6 +3,10 @@ import "./test.css"
 import mine from "../../img/mine.png"
 import logo from "../../img/logo.png"
 import golem from "../../img/golem.png"
+import hdv from "../../img/hdv.png"
+import iron from "../../img/iron.png"
+import diamond from "../../img/diamond.png"
+import emerauld from "../../img/emerauld.png"
 
 import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
 
@@ -31,16 +35,25 @@ return(
     <div class="w-1/4 h-full border-2 border-black p-4">
       <h1 class="text-center text-2xl font-bold p-4">MINE</h1>
       <br></br>
-      <p class="px-4">Iron : 0</p>
+      <div class="flex">
+        <img src={iron} class="w-8"></img>
+        <p class="px-4">: 0</p>
+      </div>   
       <br></br>
-      <p class="px-4">Gold : 0</p>
+      <div class="flex">
+        <img src={diamond} class="w-8"></img>
+        <p class="px-4">: 0</p>
+      </div>
       <br></br>
-      <p class="px-4">Emerauld : 0</p>
+      <div class="flex">
+        <img src={emerauld} class="w-8"></img>
+        <p class="px-4">: 0</p>
+      </div>
       <br></br>
       <br></br>
       <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl"></img>
     </div>
-    <div class="w-1/2 h-full border-2 border-black p-4">
+    <div class="w-1/2 h-screen border-2 border-black p-4">
       <h1 class="text-center text-2xl font-bold p-4">Village</h1>
       <br></br>
       <div class="flex h-1/2">
@@ -52,7 +65,11 @@ return(
             <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
         <div class="border-4 border-black w-1/2 h-72 p-4">
-            <p>azerty</p>
+            <p>Niveau HDV : X</p>
+            <br></br>
+            <img src={hdv} alt="hdv" class="w-36 h-36"></img>  
+            <br></br>          
+            <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
         
       </div>
