@@ -8,8 +8,6 @@ using Business.Database.Implementations;
 using Business.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -57,15 +55,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-<<<<<<< HEAD
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
-=======
-app.UseHttpsRedirection(); 
 
-app.UseCors(MyAllowSpecificOrigins);
-
->>>>>>> feature/registerAPI
 app.UseAuthorization();
 
 app.MapControllers();
