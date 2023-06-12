@@ -50,7 +50,7 @@ namespace Business.Database {
             villageBuilder.Property(x => x.GolemLevel)
                 .HasColumnType("integer")
                 .HasDefaultValue(0);
-            villageBuilder.Property(x => x.LastUpdate).HasColumnType("timestamp");
+            villageBuilder.Property(x => x.LastUpdate).HasColumnType("float");
         }
     }
 }
