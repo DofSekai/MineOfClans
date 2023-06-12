@@ -13,3 +13,30 @@ Levels -> (id, iron_rate, diamond_rate, emerald_rate, max_rate) -> (1,  5,  3, 1
 
 user_village -> (user_id, village_id)
 level_village -> (level_id, village_id)
+
+
+<Copy
+        SourceFiles="@(ReferenceCopyLocalPaths)"
+        DestinationFiles="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')"
+        SkipUnchangedFiles="$(SkipCopyUnchangedFiles)"
+        OverwriteReadOnlyFiles="$(OverwriteReadOnlyFiles)"
+        Retries="$(CopyRetryCount)"
+        RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)"
+        UseHardlinksIfPossible="$(CreateHardLinksForCopyLocalIfPossible)"
+        UseSymboliclinksIfPossible="$(CreateSymbolicLinksForCopyLocalIfPossible)"
+        Condition="'$(UseCommonOutputDirectory)' != 'true'"
+            >
+
+      <Output TaskParameter="DestinationFiles" ItemName="FileWritesShareable"/>
+      <Output TaskParameter="CopiedFiles" ItemName="ReferencesCopiedInThisBuild"/>
+      <Output TaskParameter="WroteAtLeastOneFile" PropertyName="WroteAtLeastOneFile"/>
+
+    </Copy>
+
+    <!-- If this project produces reference assemblies *and* copied (possibly transitive)
+         references on this build, subsequent builds of projects that depend on it must
+         not be considered up to date, so touch this marker file that is considered an
+         input to projects that reference this one. -->
+    <Touch Files="@(CopyUpToDateMarker)"
+      AlwaysCreate="true"
+      Condition="'@(ReferencesCopiedInThisBuild)' != '' and '$(WroteAtLeastOneFile)' == 'true'" />

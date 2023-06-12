@@ -5,24 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController :  ControllerBase {
-        private readonly IUsersService _usersService;
+    public class VillagesController :  ControllerBase {
+        private readonly IVillagesService _villagesService;
 
-        public UsersController(IUsersService usersService) {
-            _usersService = usersService;
+        public VillagesController(IVillagesService villagesService) {
+            _villagesService = villagesService;
         }
         
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<User>>> GetAllGames(CancellationToken cancellationToken = default) {
-            return Ok(await _usersService.GetAllUsers(cancellationToken));
+        public async Task<ActionResult<IEnumerable<Village>>> GetAllVillages(CancellationToken cancellationToken = default) {
+            return Ok(await _villagesService.GetAllVillages(cancellationToken));
         }
         
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult<User>> GetById(int id) {
-            var game = await _usersService.GetById(id);
+        public async Task<ActionResult<Village>> GetById(int id) {
+            var game = await _villagesService.GetById(id);
 
             if (game is null) {
                 return NoContent();
@@ -31,19 +31,13 @@ namespace Backend.Controllers {
             return Ok(game);
         }
 
-        [HttpGet("search/{name}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<User>>> SearchByName(string name) {
-            return Ok(await _usersService.SearchByName(name));
-        }
-        
         [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Create(User user) {
+        public async Task<ActionResult> Create(Village village) {
             try {
-                await _usersService.Create(user);
-                return Created($"/api/Games/{user.Id}", user);
+                await _villagesService.Create(village);
+                return Created($"/api/Games/{village.Id}", village);
             } catch (ArgumentException ex) {
                 return BadRequest(ex.Message);
             }

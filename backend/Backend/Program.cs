@@ -25,9 +25,11 @@ builder.Services.AddTransient<DatabaseContext>();
 
 // Services
 builder.Services.AddTransient<IUsersService, UsersService>();
+builder.Services.AddTransient<IVillagesService, VillagesService>();
 
 // Data
 builder.Services.AddTransient<IUsersDataAccess, UsersDatabaseAccess>();
+builder.Services.AddTransient<IVillagesDataAccess, VillagesDatabaseAccess>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
