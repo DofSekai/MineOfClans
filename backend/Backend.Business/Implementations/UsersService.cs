@@ -8,8 +8,8 @@ namespace Backend.Business.Implementations {
         private readonly IUsersDataAccess _usersDataAccess;
         private readonly ILogger<UsersService> _logger;
         
-        public UsersService(IUsersDataAccess gamesDataAccess, ILogger<UsersService> logger) {
-            _usersDataAccess = gamesDataAccess;
+        public UsersService(IUsersDataAccess usersDataAccess, ILogger<UsersService> logger) {
+            _usersDataAccess = usersDataAccess;
             _logger = logger;
         }
         
