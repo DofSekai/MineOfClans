@@ -20,7 +20,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Backend.Business\Backend.Business.csproj" />
       <ProjectReference Include="..\Backend.Common\Backend.Common.csproj" />
-      <ProjectReference Include="..\Business.Database\Business.Database.csproj" />
     </ItemGroup>
 
 </Project>

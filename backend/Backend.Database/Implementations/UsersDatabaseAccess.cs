@@ -1,8 +1,8 @@
 using Backend.Common.DAO;
-using Business.Database.Interfaces;
+using Backend.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Business.Database.Implementations {
+namespace Backend.Database.Implementations {
     public class UsersDatabaseAccess : IUsersDataAccess {
         private readonly DatabaseContext _databaseContext;
         public UsersDatabaseAccess(DatabaseContext databaseContext) {

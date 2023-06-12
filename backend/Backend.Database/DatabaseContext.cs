@@ -1,9 +1,9 @@
-using Backend.Common;
 using Backend.Common.DAO;
+using Backend.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace Business.Database {
+namespace Backend.Database {
     public class DatabaseContext : DbContext {
         public DbSet<User> users { get; set; }
         
@@ -27,6 +27,10 @@ namespace Business.Database {
                 .HasMaxLength(255)
                 .IsUnicode(true)
                 .HasColumnType("varchar");
+            userBuilder.Property(x => x.Level)
+                .HasColumnType("integer")
+                .HasDefaultValue(1);
+            userBuilder.Property(x => x.LastUpdate).HasColumnType("timestamp");
 
             userBuilder.HasIndex(x => x.Name).IsUnique();
         }

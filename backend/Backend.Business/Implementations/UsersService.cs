@@ -1,6 +1,6 @@
 using Backend.Business.Interfaces;
 using Backend.Common.DTO;
-using Business.Database.Interfaces;
+using Backend.Database.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace Backend.Business.Implementations {
@@ -8,8 +8,8 @@ namespace Backend.Business.Implementations {
         private readonly IUsersDataAccess _usersDataAccess;
         private readonly ILogger<UsersService> _logger;
         
-        public UsersService(IUsersDataAccess gamesDataAccess, ILogger<UsersService> logger) {
-            _usersDataAccess = gamesDataAccess;
+        public UsersService(IUsersDataAccess usersDataAccess, ILogger<UsersService> logger) {
+            _usersDataAccess = usersDataAccess;
             _logger = logger;
         }
         
@@ -53,7 +53,7 @@ namespace Backend.Business.Implementations {
 
         public async Task Create(User user) {
             if (user == null) {
-                throw new ArgumentException("Game object is invalid !");
+                throw new ArgumentException("User object is invalid !");
             }
 
             if (string.IsNullOrWhiteSpace(user.Name)) {
