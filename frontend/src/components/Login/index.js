@@ -31,8 +31,8 @@ export default function Login() {
                 <div class="grid grid-cols-3 gap-4">
 
                     {users.map(user => (
-                        <div class="flex flex-col items-center">
-                            <img class="w-24 h-24" src={test} alt="Profile" />
+                        <div class="flex flex-col items-center" id={user.id}>
+                            <img class="w-24 h-24" src={test}  />
                             <h3 class="text-center mt-2">{user.name}</h3>
                         </div>
 
