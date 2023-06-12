@@ -4,6 +4,8 @@ using Backend.Common;
 using Backend.Database;
 using Backend.Database.Implementations;
 using Backend.Database.Interfaces;
+using Business.Database.Implementations;
+using Business.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -34,9 +36,11 @@ builder.Services.AddTransient<DatabaseContext>();
 
 // Services
 builder.Services.AddTransient<IUsersService, UsersService>();
+builder.Services.AddTransient<IVillagesService, VillagesService>();
 
 // Data
 builder.Services.AddTransient<IUsersDataAccess, UsersDatabaseAccess>();
+builder.Services.AddTransient<IVillagesDataAccess, VillagesDatabaseAccess>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -52,8 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection(); 
-
+app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
