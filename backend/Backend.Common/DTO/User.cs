@@ -4,7 +4,7 @@
         public string Name { get; set; }
     }
     
-    public static class GameDAOtoDTOHelper {
+    public static class UserDAOtoDTOHelper {
         public static DTO.User ToDto(this DAO.User originalUser) {
             return new DTO.User() {
                 Id = originalUser.Id,

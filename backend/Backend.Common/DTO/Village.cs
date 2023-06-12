@@ -16,7 +16,7 @@ namespace Backend.Common.DTO {
                 Irons = originalVillage.Irons,
                 Diamonds = originalVillage.Diamonds,
                 Emeralds = originalVillage.Emeralds,
-                WallLevel =originalVillage.WallLevel,
+                WallLevel = originalVillage.WallLevel,
                 GolemLevel = originalVillage.GolemLevel,
                 LastUpdate = originalVillage.LastUpdate
             };
@@ -28,7 +28,7 @@ namespace Backend.Common.DTO {
                 Irons = originalVillage.Irons,
                 Diamonds = originalVillage.Diamonds,
                 Emeralds = originalVillage.Emeralds,
-                WallLevel =originalVillage.WallLevel,
+                WallLevel = originalVillage.WallLevel,
                 GolemLevel = originalVillage.GolemLevel,
                 LastUpdate = originalVillage.LastUpdate
             };
