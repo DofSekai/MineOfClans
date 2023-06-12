@@ -6,6 +6,8 @@ using Backend.Database.Implementations;
 using Backend.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 var rawConfig = new ConfigurationBuilder()
@@ -17,6 +19,13 @@ var rawConfig = new ConfigurationBuilder()
 
 var appSettingsSection = rawConfig.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
+
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy => {
+            policy.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+        });
+});
 
 builder.Services.AddHealthChecks().AddNpgSql(appSettingsSection["ConnectionString"]);
 
@@ -43,7 +52,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); 
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
