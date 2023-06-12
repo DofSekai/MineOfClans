@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
-string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var rawConfig = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -57,15 +56,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-<<<<<<< HEAD
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
-=======
-app.UseHttpsRedirection(); 
 
-app.UseCors(MyAllowSpecificOrigins);
-
->>>>>>> feature/registerAPI
 app.UseAuthorization();
 
 app.MapControllers();
