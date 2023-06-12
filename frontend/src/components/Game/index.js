@@ -51,7 +51,8 @@ return(
       </div>
       <br></br>
       <br></br>
-      <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl"></img>
+      <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl border-4 border-red-600"></img>
+      <p> Miner les ressources.. </p>
     </div>
     <div class="w-1/2 h-screen border-2 border-black p-4">
       <h1 class="text-center text-2xl font-bold p-4">Village</h1>
