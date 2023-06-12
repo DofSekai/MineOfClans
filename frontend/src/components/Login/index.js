@@ -1,10 +1,25 @@
 import '../../index.css';
 import test from "../../img/player_head.png"
-import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
+import getUsers from '../../business/getUsers';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
-export default function Login(){
-    return(
-        <section> 
+export default function Login() {
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        async function fetchUsers() {
+            try {
+                const fetchedUsers = await getUsers();
+                setUsers(fetchedUsers);
+            } catch (e) {
+                alert(e);
+            }
+        }
+
+        fetchUsers();
+    }, []);
+    return (
+        <section>
             <br></br>
             <hr></hr>
             <br></br>
@@ -13,31 +28,15 @@ export default function Login(){
             <hr></hr>
             <br></br>
             <div class=" bg-gray-100 py-9 flex flex-col justify-center sm:py-12">
-            <div class="grid grid-cols-3 gap-4">
-                <div class="flex flex-col items-center">
-                    <img class="w-24 h-24" src={test} alt="Profile 1" />
-                    <h3 class="text-center mt-2">Profile 1</h3>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img class="w-24 h-24" src={test} alt="Profile 2" />
-                    <h3 class="text-center mt-2">Profile 2</h3>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img class="w-24 h-24" src={test} alt="Profile 3" />
-                    <h3 class="text-center mt-2">Profile 3</h3>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img class="w-24 h-24" src={test} alt="Profile 3" />
-                    <h3 class="text-center mt-2">Profile 4</h3>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img class="w-24 h-24" src={test} alt="Profile 3" />
-                    <h3 class="text-center mt-2">Profile 5</h3>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img class="w-24 h-24" src={test} alt="Profile 3" />
-                    <h3 class="text-center mt-2">Profile 6</h3>
-                </div>
+                <div class="grid grid-cols-3 gap-4">
+
+                    {users.map(user => (
+                        <div class="flex flex-col items-center">
+                            <img class="w-24 h-24" src={test} alt="Profile" />
+                            <h3 class="text-center mt-2">{user.name}</h3>
+                        </div>
+
+                    ))}
                 </div>
             </div>
         </section>
