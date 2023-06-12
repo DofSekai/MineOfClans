@@ -1,3 +1,4 @@
+
 export default async function createUser(user) {
 	const res = await fetch('https://localhost:7227/api/Users', {
 		method: 'post',
