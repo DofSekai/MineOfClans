@@ -11,18 +11,19 @@ import axios from "axios"
 import config from '../../config.js';
 
 
+import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { BrowserRouter as  Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-
 export default function Game(){
-
+  
   const location = useLocation();
   const [name, setName] = useState('');
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search); 
     setName(searchParams.get('name'));
   }, [location.search]);
+
 
   const [user_irons, setIron] = useState('');
   const [user_diamond, setDiamond] = useState('');
@@ -41,6 +42,7 @@ export default function Game(){
 
   console.log(user_irons)
 
+
 return(
 
 <section class="bg-gradient-to-b from-green-600 font-serif">
@@ -48,13 +50,13 @@ return(
 <br></br>
             <hr></hr>
             <br></br>
-            
+            <Link to="/login"><button id="btn_deco">Déconnexion</button> </Link>
             <div class="flex items-center justify-center">
               <img src={logo} alt="Logo" class="test"></img>
             <h1 class="font-bold text-3xl">MineOfClans</h1>         
             </div>
             <br></br>
-            <h1 class="font-bold text-2xl">Bienvenue {name}</h1>   
+            <h1 class="font-bold text-2xl">Bienvenue {name} !</h1>   
             <br></br>
             <hr></hr>
             <br></br>
