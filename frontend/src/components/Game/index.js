@@ -7,11 +7,39 @@ import hdv from "../../img/hdv.png"
 import iron from "../../img/iron.png"
 import diamond from "../../img/diamond.png"
 import emerauld from "../../img/emerauld.png"
+import axios from "axios"
+import config from '../../config.js';
 
-import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
+
+import { useEffect, useState } from 'react';
+
+import { BrowserRouter as  Router, Route, Routes, Link, useLocation } from 'react-router-dom';
 
 export default function Game(){
 
+  const location = useLocation();
+  const [name, setName] = useState('');
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search); 
+    setName(searchParams.get('name'));
+  }, [location.search]);
+
+  const [user_irons, setIron] = useState('');
+  const [user_diamond, setDiamond] = useState('');
+  const [user_emerauld, setEmerauld] = useState('');
+
+  axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Villages')
+  .then(response => {
+    setIron(response.data[0].irons);
+    setDiamond(response.data[0].diamonds);
+    setEmerauld(response.data[0].emeralds);
+  })
+  .catch(error => {
+    // Gérez les erreurs de la requête ici
+    console.error(error);
+  });
+
+  console.log(user_irons)
 
 return(
 
@@ -26,7 +54,7 @@ return(
             <h1 class="font-bold text-3xl">MineOfClans</h1>         
             </div>
             <br></br>
-            <h1 class="font-bold text-2xl">Bienvenue .....</h1>   
+            <h1 class="font-bold text-2xl">Bienvenue {name}</h1>   
             <br></br>
             <hr></hr>
             <br></br>
@@ -37,17 +65,17 @@ return(
       <br></br>
       <div class="flex">
         <img src={iron} class="w-8"></img>
-        <p class="px-4">: 0</p>
+        <p class="px-4">: {user_irons}</p>
       </div>   
       <br></br>
       <div class="flex">
         <img src={diamond} class="w-8"></img>
-        <p class="px-4">: 0</p>
+        <p class="px-4">: {user_diamond}</p>
       </div>
       <br></br>
       <div class="flex">
         <img src={emerauld} class="w-8"></img>
-        <p class="px-4">: 0</p>
+        <p class="px-4">: {user_emerauld}</p>
       </div>
       <br></br>
       <br></br>
