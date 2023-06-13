@@ -14,7 +14,7 @@ namespace Backend.Controllers {
         
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<User>>> GetAllGames(CancellationToken cancellationToken = default) {
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers(CancellationToken cancellationToken = default) {
             return Ok(await _usersService.GetAllUsers(cancellationToken));
         }
         
@@ -22,13 +22,13 @@ namespace Backend.Controllers {
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<User>> GetById(int id) {
-            var game = await _usersService.GetById(id);
+            var user = await _usersService.GetById(id);
 
-            if (game is null) {
+            if (user is null) {
                 return NoContent();
             }
 
-            return Ok(game);
+            return Ok(user);
         }
 
         [HttpGet("search/{name}")]
@@ -43,7 +43,7 @@ namespace Backend.Controllers {
         public async Task<ActionResult> Create(User user) {
             try {
                 await _usersService.Create(user);
-                return Created($"/api/Games/{user.Id}", user);
+                return Created($"/api/{user.Id}", user);
             } catch (ArgumentException ex) {
                 return BadRequest(ex.Message);
             }
