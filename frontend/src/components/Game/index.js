@@ -26,7 +26,7 @@ return(
             <h1 class="font-bold text-3xl">MineOfClans</h1>         
             </div>
             <br></br>
-            <h1 class="font-bold text-2xl">Bienvenue .......</h1>   
+            <h1 class="font-bold text-2xl">Bienvenue .....</h1>   
             <br></br>
             <hr></hr>
             <br></br>
