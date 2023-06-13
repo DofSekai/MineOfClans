@@ -6,5 +6,6 @@ namespace Business.Database.Interfaces {
         IAsyncEnumerable<Village> GetAllVillages();
         Task<Village?> GetById(int id);
         Task Create(Village village);
+        Task Update(int id);
     }
 }
