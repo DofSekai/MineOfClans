@@ -22,13 +22,13 @@ namespace Backend.Controllers {
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<ActionResult<Village>> GetById(int id) {
-            var game = await _villagesService.GetById(id);
+            var village = await _villagesService.GetById(id);
 
-            if (game is null) {
+            if (village is null) {
                 return NoContent();
             }
 
-            return Ok(game);
+            return Ok(village);
         }
 
         [HttpPost("")]
@@ -37,7 +37,7 @@ namespace Backend.Controllers {
         public async Task<ActionResult> Create(Village village) {
             try {
                 await _villagesService.Create(village);
-                return Created($"/api/Games/{village.Id}", village);
+                return Created($"/api/{village.Id}", village);
             } catch (ArgumentException ex) {
                 return BadRequest(ex.Message);
             }
