@@ -32,8 +32,8 @@ export default function Login() {
                    
                         {users.map(user => (
                              <div class="flex flex-col items-center">
-                                <img class="w-24 h-24" src={test} alt="Profile" />
-                                <h3 class="text-center mt-2">{user.name}</h3>
+                                <a href={`http://localhost:3000/game?name=${encodeURIComponent(user.name)}`}><img class="w-24 h-24" src={test} alt="Profile" />
+                                <h3 class="text-center mt-2">{user.name}</h3></a>
                             </div>
                            
                         ))}
