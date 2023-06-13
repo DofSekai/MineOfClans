@@ -6,10 +6,10 @@ import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom'
 
 export default function Register() {
 
-    const [pseudo, setPseudo] = useState(""); // État local pour stocker la valeur de l'input
+    const [pseudo, setPseudo] = useState(""); // ï¿½tat local pour stocker la valeur de l'input
 
     function handleInputChange(event) {
-        setPseudo(event.target.value); // Mettre à jour la valeur de l'input dans l'état local
+        setPseudo(event.target.value); // Mettre ï¿½ jour la valeur de l'input dans l'ï¿½tat local
     }
     async function handleClick() {
         try {
