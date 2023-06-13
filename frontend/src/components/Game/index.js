@@ -45,7 +45,7 @@ export default function Game(){
 
 return(
 
-<section class="bg-gradient-to-b from-green-600 font-serif">
+<section class="bg-gradient-to-tr from-sky-600 font-serif">
 
 <br></br>
             <hr></hr>
