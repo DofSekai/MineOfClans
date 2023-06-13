@@ -51,17 +51,25 @@ namespace Backend.Business.Implementations {
             }
         }
 
-        public async Task Create(User user) {
-            if (user == null) {
+        public async Task<User> Create(UserCreationRequest request) {
+            if (request == null) {
                 throw new ArgumentException("User object is invalid !");
             }
 
-            if (string.IsNullOrWhiteSpace(user.Name)) {
+            if (string.IsNullOrWhiteSpace(request.Name)) {
                 throw new ArgumentException("Name is empty !");
             }
 
+            var user = new User()
+            {
+                Name = request.Name,
+                Village = new Village()
+            };
+
             try {
                 await _usersDataAccess.Create(user.ToDAO());
+
+                return user;
             } catch (Exception e) {
                 _logger.LogError(e.Message);
                 _logger.LogError(e.StackTrace);

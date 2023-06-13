@@ -29,6 +29,7 @@ namespace Backend.Database {
                 .HasMaxLength(255)
                 .IsUnicode(true)
                 .HasColumnType("varchar");
+            userBuilder.HasOne(x => x.Village);
 
             userBuilder.HasIndex(x => x.Name).IsUnique();
             

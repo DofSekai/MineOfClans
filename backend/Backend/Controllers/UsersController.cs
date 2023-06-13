@@ -40,9 +40,9 @@ namespace Backend.Controllers {
         [HttpPost("")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Create(User user) {
+        public async Task<ActionResult> Create(UserCreationRequest userRequest) {
             try {
-                await _usersService.Create(user);
+                var user = await _usersService.Create(userRequest);
                 return Created($"/api/{user.Id}", user);
             } catch (ArgumentException ex) {
                 return BadRequest(ex.Message);
