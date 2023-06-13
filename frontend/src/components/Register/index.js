@@ -6,10 +6,10 @@ import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom'
 
 export default function Register() {
 
-    const [pseudo, setPseudo] = useState(""); // État local pour stocker la valeur de l'input
+    const [pseudo, setPseudo] = useState(""); // ï¿½tat local pour stocker la valeur de l'input
 
     function handleInputChange(event) {
-        setPseudo(event.target.value); // Mettre à jour la valeur de l'input dans l'état local
+        setPseudo(event.target.value); // Mettre ï¿½ jour la valeur de l'input dans l'ï¿½tat local
     }
     async function handleClick() {
         try {
@@ -47,6 +47,7 @@ export default function Register() {
                                         <label class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Pseudo</label>
                                         
                                         </div>
+                                        <br></br>
                                         <div class="relative">
                                             <button class="bg-blue-500 text-white rounded-md px-2 py-1" value={pseudo} onClick={handleClick} >Join</button>
                                         </div>

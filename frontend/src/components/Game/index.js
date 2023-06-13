@@ -15,7 +15,7 @@ export default function Game(){
 
 return(
 
-<section class="bg-gradient-to-b from-slate-400">
+<section class="bg-gradient-to-b from-green-600 font-serif">
 
 <br></br>
             <hr></hr>
@@ -32,7 +32,7 @@ return(
             <br></br>
 
 <div class="flex h-screen">
-    <div class="w-1/4 h-full border-2 border-black p-4">
+    <div class="w-1/4 h-full border-2 border-white p-4">
       <h1 class="text-center text-2xl font-bold p-4">MINE</h1>
       <br></br>
       <div class="flex">
@@ -54,18 +54,18 @@ return(
       <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl border-4 border-red-600"></img>
       <p> Miner les ressources.. </p>
     </div>
-    <div class="w-1/2 h-screen border-2 border-black p-4">
+    <div class="w-1/2 h-screen border-2 border-white p-4">
       <h1 class="text-center text-2xl font-bold p-4">Village</h1>
       <br></br>
       <div class="flex h-1/2">
-        <div class="border-4 border-black w-1/2 h-72 p-4">
+        <div class="border-4 border-white w-1/2 h-72 p-4">
             <p>Niveau Mine : X</p>
             <br></br>
             <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl"></img>
             <br></br>
             <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
-        <div class="border-4 border-black w-1/2 h-72 p-4">
+        <div class="border-4 border-white w-1/2 h-72 p-4">
             <p>Niveau HDV : X</p>
             <br></br>
             <img src={hdv} alt="hdv" class="w-36 h-36"></img>  
@@ -74,11 +74,11 @@ return(
         </div>
         
       </div>
-      <div class="border-4 border-black h-72 p-4">
+      <div class="border-4 border-white h-72 p-4">
             <p>dofsekai</p>
         </div>
     </div>
-    <div class="w-1/4 h- border-2 border-black p-4">
+    <div class="w-1/4 h- border-2 border-white p-4">
       <h1 class="text-center text-2xl font-bold p-4">Défense</h1>
       <br></br>
       <div class="flex justify-center">
