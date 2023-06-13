@@ -42,5 +42,23 @@ namespace Backend.Controllers {
                 return BadRequest(ex.Message);
             }
         }
+        
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> Update(int id) {
+            var village = await _villagesService.GetById(id);
+
+            if (village is null) {
+                return NotFound();
+            }
+
+            try {
+                await _villagesService.Update(village.Id);
+                return NoContent();
+            } catch (ArgumentException ex) {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

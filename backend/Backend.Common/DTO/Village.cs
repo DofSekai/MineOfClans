@@ -6,7 +6,7 @@ namespace Backend.Common.DTO {
         public int Emeralds { get; set; } = 10;
         public int WallLevel { get; set; }
         public int GolemLevel { get; set; }
-        public double LastUpdate { get; set; } = ((DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0))).TotalSeconds;
+        public int LastUpdate { get; set; } = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
     }
     
     public static class VillageDAOtoDTOHelper {

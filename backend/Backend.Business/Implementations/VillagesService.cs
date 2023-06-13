@@ -53,5 +53,28 @@ namespace Backend.Business.Implementations {
                 throw;
             }
         }
+
+        public async Task Update(int id) {
+            var village = await _villagesDataAccess.GetById(id);
+            int LastUpdate = village.LastUpdate;
+            int NewLastUpdate = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            int Multiplicator = NewLastUpdate - LastUpdate;
+
+            if (village.Irons < 200) { // en base
+                village.Irons += Multiplicator * 5; //en base
+            }
+
+            if (village.Diamonds < 200) { // en base
+                village.Diamonds += Multiplicator * 3; //en base
+            }
+            
+            if (village.Emeralds < 200) { // en base
+                village.Emeralds += Multiplicator * 1; //en base
+            }
+
+            village.LastUpdate = NewLastUpdate;
+
+            await _villagesDataAccess.Update(village.Id);
+        }
     }
 }
