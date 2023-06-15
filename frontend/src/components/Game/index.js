@@ -49,6 +49,9 @@ export default function Game(){
   const [levelMine, setLevelMine] = useState('');
   const [levelHDV, setLevelHDV] = useState('');
 
+  const [prix_mine, setPrixMine] = useState('');
+  const [prix_hdv, setPrixHDV] = useState('');
+
   //stockage + stock max
   useEffect(() => {
     axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
@@ -71,6 +74,9 @@ export default function Game(){
         setMaxWall(response.data[i].village.levelHDV.maxWalls); 
         setTour(response.data[i].village.towers);
         setMaxTour(response.data[i].village.levelHDV.maxTowers);
+        
+        setPrixMine(response.data[i].village.levelMine.ironMaxRate);
+        
       } 
       else {
         console.log("erreur")
@@ -83,6 +89,8 @@ export default function Game(){
       });
     
     }, [name, lastUpdate]);
+
+    
   
    
   async function handleClick() {
@@ -162,7 +170,8 @@ return(
               </ul>
             </div>
             <br></br>
-            <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={prix_mine}>
+              Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
             <p>Niveau HDV : {levelHDV} </p>
@@ -176,7 +185,8 @@ return(
               </ul>
             </div>
             <br></br><br></br>     
-            <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={prix_hdv}>
+              Upgrade</button>
         </div>
         
       </div>
