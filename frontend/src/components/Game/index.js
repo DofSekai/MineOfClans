@@ -37,14 +37,14 @@ export default function Game(){
 
   const [user_golem, setGolem] = useState('');
   const [user_wall, setWall] = useState('');
-  //const [user_tour, setTour] = useState('');
+  const [user_tour, setTour] = useState('');
 
   const [max_irons, setMaxIron] = useState('');
   const [max_diamond, setMaxDiamond] = useState('');
   const [max_emerauld, setMaxEmerauld] = useState('');
-  //const [max_golem, setMaxGolem] = useState('');
-  //const [max_wall, setMaxWall] = useState('');
-  //const [max_tour, setMaxTour] = useState('');
+  const [max_golem, setMaxGolem] = useState('');
+  const [max_wall, setMaxWall] = useState('');
+  const [max_tour, setMaxTour] = useState('');
 
   const [levelMine, setLevelMine] = useState('');
   const [levelHDV, setLevelHDV] = useState('');
@@ -62,13 +62,13 @@ export default function Game(){
         setMaxDiamond(response.data[i].village.levelMine.diamondMaxRate);
         setMaxEmerauld(response.data[i].village.levelMine.emeraldMaxRate);
         setLevelMine(response.data[i].village.levelMineId);
-        setLevelHDV(response.data[i].village.levelHDV);
+        setLevelHDV(response.data[i].village.levelHDVId);
         setGolem(response.data[i].village.golems);
         setWall(response.data[i].village.walls);
-        //setMaxGolem(response.data[i].village.golemMaxRate);
-        //setMaxWall(response.data[i].village.wallMaxRate); 
-        //setTour(response.data[i].village.tour);
-        //setMaxTour(response.data[i].village.tourMaxRate);
+        setMaxGolem(response.data[i].village.levelHDV.maxGolems);
+        setMaxWall(response.data[i].village.levelHDV.maxWalls); 
+        setTour(response.data[i].village.towers);
+        setMaxTour(response.data[i].village.levelHDV.maxTowers);
       } 
       else {
         console.log("erreur")
@@ -140,7 +140,7 @@ return(
       <div>
           <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center"></img>
           <div class="flex">
-            <p class="pe-2">Nombre de tours : </p>
+            <p class="pe-2">Nombre de tours : {user_tour} </p>
           </div>
       </div>
     </div>
@@ -168,9 +168,9 @@ return(
             <div id="hdv" class="mx-5"><img src={hdv} alt="hdv" class="w-36 h-36"></img></div>  
             <div class="mr-50">
               <ul class="list-disc ml-8" id="stock_hdv">
-                <li>Max golems : </li>
-                <li>Max murailles : </li>
-                <li>Max tours : </li>
+                <li>Max golems : {max_golem}</li>
+                <li>Max murailles : {max_wall}</li>
+                <li>Max tours : {max_tour}</li>
               </ul>
             </div>
             <br></br><br></br>     
