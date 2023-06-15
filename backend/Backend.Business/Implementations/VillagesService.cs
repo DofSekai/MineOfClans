@@ -66,24 +66,24 @@ namespace Backend.Business.Implementations {
             int DiamondMaxRate = village.LevelMine.DiamondMaxRate;
             int EmeraldMaxRate = village.LevelMine.EmeraldMaxRate;
             
-            if (village.Irons + Multiplicator * IronRate < IronMaxRate) { // en base
-                village.Irons += Multiplicator * IronRate; //en base
+            if (village.Irons + Multiplicator * IronRate < IronMaxRate) { 
+                village.Irons += Multiplicator * IronRate;
             }
             else
             {
                 village.Irons = IronMaxRate;
             }
 
-            if (village.Diamonds + Multiplicator * DiamondRate < DiamondMaxRate) { // en base
-                village.Diamonds += Multiplicator * DiamondRate; //en base
+            if (village.Diamonds + Multiplicator * DiamondRate < DiamondMaxRate) {
+                village.Diamonds += Multiplicator * DiamondRate;
             }
             else
             {
                 village.Diamonds = DiamondMaxRate;
             }
             
-            if (village.Emeralds + Multiplicator * EmeraldRate < EmeraldMaxRate) { // en base
-                village.Emeralds += Multiplicator * EmeraldRate; //en base
+            if (village.Emeralds + Multiplicator * EmeraldRate < EmeraldMaxRate) {
+                village.Emeralds += Multiplicator * EmeraldRate;
             }
             else
             {

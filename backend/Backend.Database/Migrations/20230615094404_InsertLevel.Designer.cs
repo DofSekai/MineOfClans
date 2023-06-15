@@ -2,17 +2,20 @@
 using Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Backend.Database.Migrations
+namespace Business.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230615094404_InsertLevel")]
+    partial class InsertLevel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,7 +100,7 @@ namespace Backend.Database.Migrations
                         .HasColumnType("integer")
                         .HasDefaultValue(10);
 
-                    b.Property<int>("Golems")
+                    b.Property<int>("GolemLevel")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
@@ -118,7 +121,7 @@ namespace Backend.Database.Migrations
                     b.Property<int>("LevelMineId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Walls")
+                    b.Property<int>("WallLevel")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
