@@ -10,7 +10,7 @@ namespace Backend.Common.DTO {
         public LevelMine LevelMine { get; set; }
         public int LevelMineId { get; set; } = 1;
         public MaxItems LevelHDV { get; set; }
-        public int LevelHDV_Id { get; set; } = 1;
+        public int LevelHDVId { get; set; } = 1;
         public int LastUpdate { get; set; } = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
     }
     
@@ -27,7 +27,7 @@ namespace Backend.Common.DTO {
                 LevelMine = originalVillage.LevelMine.ToDto(),
                 LevelMineId = originalVillage.LevelMineId,
                 LevelHDV = originalVillage.LevelHDV.ToDto(),
-                LevelHDV_Id = originalVillage.LevelHDV_Id,
+                LevelHDVId = originalVillage.LevelHDVId,
                 LastUpdate = originalVillage.LastUpdate
             };
         }
@@ -42,7 +42,7 @@ namespace Backend.Common.DTO {
                 Golems = originalVillage.Golems,
                 Towers = originalVillage.Towers,
                 LevelMineId = originalVillage.LevelMineId,
-                LevelHDV_Id = originalVillage.LevelHDV_Id,
+                LevelHDVId = originalVillage.LevelHDVId,
                 LastUpdate = originalVillage.LastUpdate
             };
         }
