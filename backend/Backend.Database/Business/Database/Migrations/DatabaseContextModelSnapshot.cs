@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Backend.Database.Migrations
+namespace Business.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     partial class DatabaseContextModelSnapshot : ModelSnapshot
@@ -20,6 +20,28 @@ namespace Backend.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Backend.Common.DAO.LevelHdv", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MaxGolems")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MaxTowers")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MaxWalls")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("levelHdvs");
+                });
 
             modelBuilder.Entity("Backend.Common.DAO.LevelMine", b =>
                 {
@@ -110,6 +132,9 @@ namespace Backend.Database.Migrations
                     b.Property<int>("LastUpdate")
                         .HasColumnType("integer");
 
+                    b.Property<int>("LevelHdvId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("LevelMineId")
                         .HasColumnType("integer");
 
@@ -124,6 +149,8 @@ namespace Backend.Database.Migrations
                         .HasDefaultValue(0);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LevelHdvId");
 
                     b.HasIndex("LevelMineId");
 
@@ -143,11 +170,19 @@ namespace Backend.Database.Migrations
 
             modelBuilder.Entity("Backend.Common.DAO.Village", b =>
                 {
+                    b.HasOne("Backend.Common.DAO.LevelHdv", "LevelHdv")
+                        .WithMany()
+                        .HasForeignKey("LevelHdvId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Backend.Common.DAO.LevelMine", "LevelMine")
                         .WithMany()
                         .HasForeignKey("LevelMineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LevelHdv");
 
                     b.Navigation("LevelMine");
                 });

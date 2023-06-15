@@ -9,8 +9,6 @@ namespace Backend.Common.DAO {
         public int Towers { get; set; }
         public LevelMine LevelMine { get; set; } 
         public int LevelMineId { get; set; }
-        public MaxItems LevelHDV { get; set; }
-        public int LevelHDVId { get; set; }
         public int LastUpdate { get; set; } = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
     }
 }

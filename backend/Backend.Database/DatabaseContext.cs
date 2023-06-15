@@ -8,7 +8,6 @@ namespace Backend.Database {
         public DbSet<User> users { get; set; }
         public DbSet<Village> villages { get; set; }
         public DbSet<LevelMine> levelMines { get; set; }
-        public DbSet<MaxItems> maxItems { get; set; }
 
         private readonly string ConnectionString;
         
@@ -24,7 +23,6 @@ namespace Backend.Database {
             var userBuilder = modelBuilder.Entity<User>();
             var villageBuilder = modelBuilder.Entity<Village>();
             var levelMineBuilder = modelBuilder.Entity<LevelMine>();
-            var maxItemsBuilder = modelBuilder.Entity<MaxItems>();
 
             userBuilder.HasKey(x => x.Id);
 
@@ -61,9 +59,6 @@ namespace Backend.Database {
             villageBuilder.HasOne(x => x.LevelMine)
                 .WithMany()
                 .HasForeignKey(x => x.LevelMineId);
-            villageBuilder.HasOne(x => x.LevelHDV)
-                .WithMany()
-                .HasForeignKey(x => x.LevelHDVId);
             villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
 
             levelMineBuilder.HasKey(x => x.Id);
@@ -75,12 +70,6 @@ namespace Backend.Database {
             levelMineBuilder.Property(x => x.IronMaxRate).HasColumnType("integer");
             levelMineBuilder.Property(x => x.DiamondMaxRate).HasColumnType("integer");
             levelMineBuilder.Property(x => x.EmeraldMaxRate).HasColumnType("integer");
-            
-            maxItemsBuilder.HasKey(x => x.Id);
-            maxItemsBuilder.Property(x => x.Id).HasColumnType("integer");
-            maxItemsBuilder.Property(x => x.MaxGolems).HasColumnType("integer");
-            maxItemsBuilder.Property(x => x.MaxWalls).HasColumnType("integer");
-            maxItemsBuilder.Property(x => x.MaxTowers).HasColumnType("integer");
         }
     }
 }
