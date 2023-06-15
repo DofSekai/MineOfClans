@@ -42,7 +42,7 @@ namespace Backend.Business.Implementations {
 
         public async Task Create(Village village) {
             if (village == null) {
-                throw new ArgumentException("Game object is invalid !");
+                throw new ArgumentException("Village object is invalid !");
             }
 
             try {
@@ -59,17 +59,35 @@ namespace Backend.Business.Implementations {
             int LastUpdate = village.LastUpdate;
             int NewLastUpdate = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
             int Multiplicator = NewLastUpdate - LastUpdate;
-
-            if (village.Irons + Multiplicator * 5 < 200) { // en base
-                village.Irons += Multiplicator * 5; //en base
+            int IronRate = village.LevelMine.IronRate;
+            int DiamondRate = village.LevelMine.DiamondRate;
+            int EmeraldRate = village.LevelMine.EmeraldRate;
+            int IronMaxRate = village.LevelMine.IronMaxRate;
+            int DiamondMaxRate = village.LevelMine.DiamondMaxRate;
+            int EmeraldMaxRate = village.LevelMine.EmeraldMaxRate;
+            
+            if (village.Irons + Multiplicator * IronRate < IronMaxRate) { // en base
+                village.Irons += Multiplicator * IronRate; //en base
+            }
+            else
+            {
+                village.Irons = IronMaxRate;
             }
 
-            if (village.Diamonds + Multiplicator * 5 < 200) { // en base
-                village.Diamonds += Multiplicator * 3; //en base
+            if (village.Diamonds + Multiplicator * DiamondRate < DiamondMaxRate) { // en base
+                village.Diamonds += Multiplicator * DiamondRate; //en base
+            }
+            else
+            {
+                village.Diamonds = DiamondMaxRate;
             }
             
-            if (village.Emeralds + Multiplicator * 5 < 200) { // en base
-                village.Emeralds += Multiplicator * 1; //en base
+            if (village.Emeralds + Multiplicator * EmeraldRate < EmeraldMaxRate) { // en base
+                village.Emeralds += Multiplicator * EmeraldRate; //en base
+            }
+            else
+            {
+                village.Emeralds = EmeraldMaxRate;
             }
 
             village.LastUpdate = NewLastUpdate;

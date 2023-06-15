@@ -6,6 +6,8 @@ namespace Backend.Common.DTO {
         public int Emeralds { get; set; } = 10;
         public int WallLevel { get; set; }
         public int GolemLevel { get; set; }
+        public LevelMine LevelMine { get; set; }
+        public int LevelMineId { get; set; } = 1;
         public int LastUpdate { get; set; } = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
     }
     
@@ -18,6 +20,8 @@ namespace Backend.Common.DTO {
                 Emeralds = originalVillage.Emeralds,
                 WallLevel = originalVillage.WallLevel,
                 GolemLevel = originalVillage.GolemLevel,
+                LevelMine = originalVillage.LevelMine.ToDto(),
+                LevelMineId = originalVillage.LevelMineId,
                 LastUpdate = originalVillage.LastUpdate
             };
         }
@@ -30,6 +34,7 @@ namespace Backend.Common.DTO {
                 Emeralds = originalVillage.Emeralds,
                 WallLevel = originalVillage.WallLevel,
                 GolemLevel = originalVillage.GolemLevel,
+                LevelMineId = originalVillage.LevelMineId,
                 LastUpdate = originalVillage.LastUpdate
             };
         }
