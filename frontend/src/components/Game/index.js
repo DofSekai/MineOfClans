@@ -84,7 +84,13 @@ return(
       <br></br>
       <br></br>
       <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl border-4 border-slate-700"></img>
-      <p> Miner les ressources.. </p>
+      <p class="mx-10"> Miner</p>
+      
+      <div class="flex justify-center my-10">
+        <img src={sorcier} alt="sorcier" class="w-26 h-52"></img>
+      </div>
+      <br></br>
+      <p class="px-4 text-center">Nombre de tours : 0</p>
     </div>
     <div class="w-1/2 h-screen border-2 border-white p-4 ">
       <h1 class="text-center text-2xl font-bold p-4">Village</h1>
@@ -145,7 +151,6 @@ return(
       <p class="px-4 text-center">Nombre de murailles : 0</p>
     </div>
   </div>
-
 </section>   
 
 );
