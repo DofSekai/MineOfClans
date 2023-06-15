@@ -10,15 +10,24 @@ namespace Backend.Database.Implementations {
         }
         
         public IAsyncEnumerable<User> GetAllUsers() {
-            return _databaseContext.users.Include(x => x.Village).ThenInclude(x => x.LevelMine).AsAsyncEnumerable();
+            return _databaseContext.users
+                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
+                .Include(x => x.Village).ThenInclude(x => x.LevelHDV)
+                .AsAsyncEnumerable();
         }
 
         public async Task<User?> GetById(int id) {
-            return await _databaseContext.users.Include(x => x.Village).ThenInclude(x => x.LevelMine).FirstOrDefaultAsync(x => x.Id == id);
+            return await _databaseContext.users
+                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
+                .Include(x => x.Village).ThenInclude(x => x.LevelHDV)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<User>> SearchByName(string name) {
-            return _databaseContext.users.Include(x => x.Village).ThenInclude(x => x.LevelMine).Where(x => x.Name.Contains(name));
+            return _databaseContext.users
+                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
+                .Include(x => x.Village).ThenInclude(x => x.LevelHDV)
+                .Where(x => x.Name.Contains(name));
         }
 
         public async Task Create(User user) {

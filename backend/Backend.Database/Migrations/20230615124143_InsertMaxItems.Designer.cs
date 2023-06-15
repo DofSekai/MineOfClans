@@ -2,17 +2,20 @@
 using Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Backend.Database.Migrations
+namespace Business.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230615124143_InsertMaxItems")]
+    partial class InsertMaxItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,7 +135,7 @@ namespace Backend.Database.Migrations
                     b.Property<int>("LastUpdate")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LevelHDVId")
+                    b.Property<int>("LevelHDV_Id")
                         .HasColumnType("integer");
 
                     b.Property<int>("LevelMineId")
@@ -150,7 +153,7 @@ namespace Backend.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LevelHDVId");
+                    b.HasIndex("LevelHDV_Id");
 
                     b.HasIndex("LevelMineId");
 
@@ -172,7 +175,7 @@ namespace Backend.Database.Migrations
                 {
                     b.HasOne("Backend.Common.DAO.MaxItems", "LevelHDV")
                         .WithMany()
-                        .HasForeignKey("LevelHDVId")
+                        .HasForeignKey("LevelHDV_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
