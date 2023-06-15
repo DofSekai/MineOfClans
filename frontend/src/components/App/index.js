@@ -27,7 +27,7 @@ export default function App() {
             <hr></hr>
             <div class="p-9 flex justify-center space-x-2">
                 <Link to="/login"><button className="bg-red-500 rounded-xl p-4 w-20 text-white">Login</button> </Link>
-                <Link to="/register" className="bg-blue-500 rounded-xl p-4 w-20 text-white"><button>Register</button> </Link>
+                <Link to="/register" className="bg-blue-500 rounded-xl p-4 w-28 text-white"><button>Register</button> </Link>
             </div>
 
         </section>
