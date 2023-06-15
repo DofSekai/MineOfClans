@@ -42,7 +42,7 @@ namespace Backend.Business.Implementations {
 
         public async Task Create(Village village) {
             if (village == null) {
-                throw new ArgumentException("Game object is invalid !");
+                throw new ArgumentException("Village object is invalid !");
             }
 
             try {

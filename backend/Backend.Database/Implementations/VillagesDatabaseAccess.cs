@@ -12,11 +12,11 @@ namespace Business.Database.Implementations {
         }
         
         public IAsyncEnumerable<Village> GetAllVillages() {
-            return _databaseContext.villages.AsAsyncEnumerable();
+            return _databaseContext.villages.Include(x => x.LevelMine).AsAsyncEnumerable();
         }
 
         public async Task<Village?> GetById(int id) {
-            return await _databaseContext.villages.FirstOrDefaultAsync(x => x.Id == id);
+            return await _databaseContext.villages.Include(x => x.LevelMine).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task Create(Village village) {
