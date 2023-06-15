@@ -7,6 +7,8 @@ import hdv from "../../img/hdv.png"
 import iron from "../../img/iron.png"
 import diamond from "../../img/diamond.png"
 import emerauld from "../../img/emerauld.png"
+import murailles from "../../img/murailles.png"
+import sorcier from "../../img/sorcier.png"
 import axios from "axios"
 import config from '../../config.js';
 
@@ -81,21 +83,21 @@ return(
       </div>
       <br></br>
       <br></br>
-      <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl border-4 border-red-600"></img>
+      <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl border-4 border-slate-700"></img>
       <p> Miner les ressources.. </p>
     </div>
-    <div class="w-1/2 h-screen border-2 border-white p-4">
+    <div class="w-1/2 h-screen border-2 border-white p-4 ">
       <h1 class="text-center text-2xl font-bold p-4">Village</h1>
       <br></br>
       <div class="flex h-1/2">
-        <div class="border-4 border-white w-1/2 h-72 p-4">
+        <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
             <p>Niveau Mine : X</p>
             <br></br>
             <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl"></img>
             <br></br>
             <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
-        <div class="border-4 border-white w-1/2 h-72 p-4">
+        <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
             <p>Niveau HDV : X</p>
             <br></br>
             <img src={hdv} alt="hdv" class="w-36 h-36"></img>  
@@ -104,9 +106,29 @@ return(
         </div>
         
       </div>
-      <div class="border-4 border-white h-72 p-4">
-            <p>dofsekai</p>
+      <div class="border-4 border-white h-72 p-4 text-xl">
+        <p>Shop :</p>
+        <div class="image-container">
+        <div>
+          <img src={golem} alt="golem" class="w-26 h-40 text-center"></img>
+          <div class="golem-container">
+            <p class="pe-2">100</p><img src={iron} class="w-8"></img>
         </div>
+        </div>
+        <div>
+          <img src={murailles} alt="murailles" class="w-26 h-40 text-center"></img>
+          <div class="murailles-container">
+          <p class="pe-2">30 </p> <img src={diamond} class="w-8"></img>
+          </div>
+        </div>
+        <div>
+          <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center"></img>
+          <div class="sorcier-container">
+            <p class="pe-2">100</p><img src={emerauld} class="w-8"></img>
+        </div>
+        </div>
+      </div>          
+      </div>
     </div>
     <div class="w-1/4 h- border-2 border-white p-4">
       <h1 class="text-center text-2xl font-bold p-4">Défense</h1>
@@ -115,7 +137,12 @@ return(
         <img src={golem} alt="golem" class="w-26 h-52"></img>
       </div>
       <br></br>
-      <p class="px-4">Nombre de Golems : 0</p>
+      <p class="px-4 text-center">Nombre de Golems : 0</p>
+      <div class="flex justify-center my-10">
+        <img src={murailles} alt="murailles" class="w-26 h-52"></img>
+      </div>
+      <br></br>
+      <p class="px-4 text-center">Nombre de murailles : 0</p>
     </div>
   </div>
 
