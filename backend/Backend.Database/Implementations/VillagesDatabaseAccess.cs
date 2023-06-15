@@ -14,12 +14,14 @@ namespace Business.Database.Implementations {
         public IAsyncEnumerable<Village> GetAllVillages() {
             return _databaseContext.villages
                 .Include(x => x.LevelMine)
+                .Include(x => x.LevelHdv)
                 .AsAsyncEnumerable();
         }
 
         public async Task<Village?> GetById(int id) {
             return await _databaseContext.villages
                 .Include(x => x.LevelMine)
+                .Include(x => x.LevelHdv)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
