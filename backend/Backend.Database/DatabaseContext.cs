@@ -64,6 +64,9 @@ namespace Backend.Database {
             levelMineBuilder.Property(x => x.IronRate).HasColumnType("integer");
             levelMineBuilder.Property(x => x.DiamondRate).HasColumnType("integer");
             levelMineBuilder.Property(x => x.EmeraldRate).HasColumnType("integer");
+            levelMineBuilder.Property(x => x.IronMaxRate).HasColumnType("integer");
+            levelMineBuilder.Property(x => x.DiamondMaxRate).HasColumnType("integer");
+            levelMineBuilder.Property(x => x.EmeraldMaxRate).HasColumnType("integer");
         }
     }
 }
