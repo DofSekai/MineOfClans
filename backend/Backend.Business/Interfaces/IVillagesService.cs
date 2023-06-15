@@ -6,6 +6,6 @@ namespace Backend.Business.Interfaces
         Task<IEnumerable<Village>> GetAllVillages(CancellationToken cancellationToken);
         Task<Village?> GetById(int id);
         Task Create(Village village);
-        Task UpdateResource(int id);
+        Task Update(int id);
     }
 }

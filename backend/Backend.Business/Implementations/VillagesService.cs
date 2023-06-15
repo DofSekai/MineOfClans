@@ -54,7 +54,7 @@ namespace Backend.Business.Implementations {
             }
         }
 
-        public async Task UpdateResource(int id) {
+        public async Task Update(int id) {
             var village = await _villagesDataAccess.GetById(id);
             int LastUpdate = village.LastUpdate;
             int NewLastUpdate = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
