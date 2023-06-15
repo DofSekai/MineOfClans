@@ -60,15 +60,15 @@ namespace Backend.Business.Implementations {
             int NewLastUpdate = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
             int Multiplicator = NewLastUpdate - LastUpdate;
 
-            if (village.Irons < 200) { // en base
+            if (village.Irons + Multiplicator * 5 < 200) { // en base
                 village.Irons += Multiplicator * 5; //en base
             }
 
-            if (village.Diamonds < 200) { // en base
+            if (village.Diamonds + Multiplicator * 5 < 200) { // en base
                 village.Diamonds += Multiplicator * 3; //en base
             }
             
-            if (village.Emeralds < 200) { // en base
+            if (village.Emeralds + Multiplicator * 5 < 200) { // en base
                 village.Emeralds += Multiplicator * 1; //en base
             }
 
