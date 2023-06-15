@@ -59,6 +59,7 @@ export default function Game(){
         setIron(response.data[i].village.irons);
         setDiamond(response.data[i].village.diamonds);
         setEmerauld(response.data[i].village.emeralds);
+        setIdVillage(response.data[i].village.id);
         setMaxIron(response.data[i].village.levelMine.ironMaxRate);
         setMaxDiamond(response.data[i].village.levelMine.diamondMaxRate);
         setMaxEmerauld(response.data[i].village.levelMine.emeraldMaxRate);
