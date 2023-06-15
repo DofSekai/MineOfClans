@@ -1,0 +1,6 @@
+html{
+    background-image: url("img/testbg.jpg");
+    background-size: cover;
+    backdrop-filter: blur(5px); /* Ajustez la valeur pour le niveau de flou souhaité */
+    z-index: -1;
+}
