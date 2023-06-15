@@ -11,7 +11,7 @@ namespace Business.Database.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("INSERT INTO \"levelMines\"(\"IronRate\", \"DiamondRate\", \"EmeraldRate\", \"IronMaxRate\", \"DiamondMaxRate\", \"EmeraldMaxRate\") VALUES(10, 5, 1, 100, 50, 20)");
+            migrationBuilder.Sql("INSERT INTO \"levelMines\"(\"IronRate\", \"DiamondRate\", \"EmeraldRate\", \"IronMaxRate\", \"DiamondMaxRate\", \"EmeraldMaxRate\") VALUES(3, 2, 1, 10000, 10000, 10000)");
         }
 
         /// <inheritdoc />
