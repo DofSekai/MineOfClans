@@ -32,6 +32,13 @@ export default function Game(){
   const [user_diamond, setDiamond] = useState('');
   const [user_emerauld, setEmerauld] = useState('');
 
+  const [max_irons, setMaxIron] = useState('');
+  const [max_diamond, setMaxDiamond] = useState('');
+  const [max_emerauld, setMaxEmerauld] = useState('');
+
+  const [levelMine, setLevelMine] = useState('');
+
+  //stockage + stock max
   axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
   .then(response => {
     for(let i = 0; i < response.data.length; i++){
@@ -39,8 +46,12 @@ export default function Game(){
         setIron(response.data[i].village.irons);
         setDiamond(response.data[i].village.diamonds);
         setEmerauld(response.data[i].village.emeralds);
+        setMaxIron(response.data[i].village.levelMine.ironMaxRate);
+        setMaxDiamond(response.data[i].village.levelMine.diamondMaxRate);
+        setMaxEmerauld(response.data[i].village.levelMine.emeraldMaxRate);
+        setLevelMine(response.data[i].village.levelMineId);
       } else {
-        console.log("erreur pseudooo")
+        console.log("erreur")
       }
     }
     
@@ -50,10 +61,11 @@ export default function Game(){
     console.error(error);
   });
 
+  
 
 return(
 
-<section class="bg-gradient-to-tr from-sky-600 font-serif">
+<section class="bg-gradient-to-tr from-sky-600 font-serif text-white">
 
 <br></br>
             <hr></hr>
@@ -98,7 +110,7 @@ return(
       <div>
           <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center"></img>
           <div class="flex">
-            <p class="pe-2">Nombre de tours : 0</p>
+            <p class="pe-2">Nombre de tours : </p>
           </div>
       </div>
     </div>
@@ -107,14 +119,14 @@ return(
       <br></br>
       <div class="flex h-1/2">
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
-            <p>Niveau Mine : X</p>
+            <p>Niveau Mine : {levelMine}</p>
             <br></br>
             <div id="mine" class="mx-5"><img src={mine} alt="mine" class="w-38 h-36 rounded-3xl"></img></div>
             <div class="mr-50">
               <ul class="list-disc ml-8" id="stock_mine">
-                <li>Max fer :</li>
-                <li>Max diamant : </li>
-                <li>Max émeraude : </li>
+                <li>Max fer : {max_irons}</li>
+                <li>Max diamant : {max_diamond} </li>
+                <li>Max émeraude : {max_emerauld} </li>
               </ul>
             </div>
             <br></br>
