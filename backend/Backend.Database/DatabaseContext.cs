@@ -56,6 +56,9 @@ namespace Backend.Database {
             villageBuilder.HasOne(x => x.LevelMine)
                 .WithMany()
                 .HasForeignKey(x => x.LevelMineId);
+            villageBuilder.Property(x => x.LevelHDV)
+                .HasColumnType("interger")
+                .HasDefaultValue(1);
             villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
 
             levelMineBuilder.HasKey(x => x.Id);
