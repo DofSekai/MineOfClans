@@ -105,7 +105,7 @@ return(
       </div>
       <br></br>
       <br></br>
-      <img src={mineButton} onClick={handleClick} alt="mine" class="w-36 h-34"></img>
+      <img src={mineButton} onClick={handleClick} alt="mine" class="w-36 h-34 hover:border"></img>
       <p> CLIQUER POUR MINER </p>
 
       <br></br>
@@ -155,19 +155,19 @@ return(
         <p>Shop :</p>
         <div class="image-container">
         <div>
-          <img src={golem} alt="golem" class="w-26 h-40 text-center"></img>
+          <img src={golem} alt="golem" class="w-26 h-40 text-center hover:border"></img>
           <div class="golem-container">
             <p class="pe-2">100</p><img src={iron} class="w-8"></img>
         </div>
         </div>
         <div>
-          <img src={murailles} alt="murailles" class="w-26 h-40 text-center"></img>
+          <img src={murailles} alt="murailles" class="w-26 h-40 text-center hover:border"></img>
           <div class="murailles-container">
           <p class="pe-2">30 </p> <img src={diamond} class="w-8"></img>
           </div>
         </div>
         <div>
-          <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center"></img>
+          <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center hover:border"></img>
           <div class="sorcier-container">
             <p class="pe-2">90</p><img src={emerauld} class="w-8"></img>
         </div>
