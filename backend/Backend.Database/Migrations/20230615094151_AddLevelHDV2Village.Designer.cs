@@ -115,7 +115,7 @@ namespace Business.Database.Migrations
 
                     b.Property<int>("LevelHDV")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("interger")
+                        .HasColumnType("integer")
                         .HasDefaultValue(1);
 
                     b.Property<int>("LevelMineId")

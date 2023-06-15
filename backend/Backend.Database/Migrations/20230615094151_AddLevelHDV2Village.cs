@@ -13,7 +13,7 @@ namespace Business.Database.Migrations
             migrationBuilder.AddColumn<int>(
                 name: "LevelHDV",
                 table: "villages",
-                type: "interger",
+                type: "integer",
                 nullable: false,
                 defaultValue: 1);
         }

@@ -4,8 +4,8 @@ namespace Backend.Common.DAO {
         public int Irons { get; set; } = 30;
         public int Diamonds { get; set; } = 20;
         public int Emeralds { get; set; } = 10;
-        public int WallLevel { get; set; }
-        public int GolemLevel { get; set; }
+        public int Walls { get; set; }
+        public int Golems { get; set; }
         public LevelMine LevelMine { get; set; } 
         public int LevelMineId { get; set; }
         public int LevelHDV { get; set; } = 1;

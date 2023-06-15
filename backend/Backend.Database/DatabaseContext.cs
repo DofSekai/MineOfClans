@@ -47,17 +47,17 @@ namespace Backend.Database {
             villageBuilder.Property(x => x.Emeralds)
                 .HasColumnType("integer")
                 .HasDefaultValue(10);
-            villageBuilder.Property(x => x.WallLevel)
+            villageBuilder.Property(x => x.Walls)
                 .HasColumnType("integer")
                 .HasDefaultValue(0);
-            villageBuilder.Property(x => x.GolemLevel)
+            villageBuilder.Property(x => x.Golems)
                 .HasColumnType("integer")
                 .HasDefaultValue(0);
             villageBuilder.HasOne(x => x.LevelMine)
                 .WithMany()
                 .HasForeignKey(x => x.LevelMineId);
             villageBuilder.Property(x => x.LevelHDV)
-                .HasColumnType("interger")
+                .HasColumnType("integer")
                 .HasDefaultValue(1);
             villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
 
