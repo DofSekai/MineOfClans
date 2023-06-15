@@ -2,17 +2,20 @@
 using Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Backend.Database.Migrations
+namespace Business.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230615120352_AddToursToVillage")]
+    partial class AddToursToVillage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,28 +53,6 @@ namespace Backend.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("levelMines");
-                });
-
-            modelBuilder.Entity("Backend.Common.DAO.MaxItems", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("MaxGolems")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MaxTowers")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MaxWalls")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("maxItems");
                 });
 
             modelBuilder.Entity("Backend.Common.DAO.User", b =>
@@ -132,13 +113,15 @@ namespace Backend.Database.Migrations
                     b.Property<int>("LastUpdate")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LevelHDV_Id")
-                        .HasColumnType("integer");
+                    b.Property<int>("LevelHDV")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
 
                     b.Property<int>("LevelMineId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Towers")
+                    b.Property<int>("Tours")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
@@ -149,8 +132,6 @@ namespace Backend.Database.Migrations
                         .HasDefaultValue(0);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LevelHDV_Id");
 
                     b.HasIndex("LevelMineId");
 
@@ -170,19 +151,11 @@ namespace Backend.Database.Migrations
 
             modelBuilder.Entity("Backend.Common.DAO.Village", b =>
                 {
-                    b.HasOne("Backend.Common.DAO.MaxItems", "LevelHDV")
-                        .WithMany()
-                        .HasForeignKey("LevelHDV_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Backend.Common.DAO.LevelMine", "LevelMine")
                         .WithMany()
                         .HasForeignKey("LevelMineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("LevelHDV");
 
                     b.Navigation("LevelMine");
                 });
