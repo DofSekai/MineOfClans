@@ -1,6 +1,7 @@
 import "../App/default.css"
 import "./test.css"
 import mine from "../../img/mine.png"
+import mineButton from "../../img/mine-logo.png"
 import logo from "../../img/logo.png"
 import golem from "../../img/golem.png"
 import hdv from "../../img/hdv.png"
@@ -29,23 +30,28 @@ export default function Game(){
   const [user_diamond, setDiamond] = useState('');
   const [user_emerauld, setEmerauld] = useState('');
 
-  axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Villages')
+  axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
   .then(response => {
-    setIron(response.data[0].irons);
-    setDiamond(response.data[0].diamonds);
-    setEmerauld(response.data[0].emeralds);
+    for(let i = 0; i < response.data.length; i++){
+      if(response.data[i].name == {name}.name){
+        setIron(response.data[i].village.irons);
+        setDiamond(response.data[i].village.diamonds);
+        setEmerauld(response.data[i].village.emeralds);
+      } else {
+        console.log("erreur pseudooo")
+      }
+    }
+    
   })
   .catch(error => {
     // Gérez les erreurs de la requête ici
     console.error(error);
   });
 
-  console.log(user_irons)
-
 
 return(
 
-<section class="bg-gradient-to-b from-green-600 font-serif">
+<section class="bg-gradient-to-tr from-sky-600 font-serif">
 
 <br></br>
             <hr></hr>
@@ -81,8 +87,8 @@ return(
       </div>
       <br></br>
       <br></br>
-      <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl border-4 border-red-600"></img>
-      <p> Miner les ressources.. </p>
+      <img src={mineButton} alt="mine" class="w-42 h-40"></img>
+      <p> Clique sur l'image pour miner tes ressources ... </p>
     </div>
     <div class="w-1/2 h-screen border-2 border-white p-4">
       <h1 class="text-center text-2xl font-bold p-4">Village</h1>
@@ -91,7 +97,7 @@ return(
         <div class="border-4 border-white w-1/2 h-72 p-4">
             <p>Niveau Mine : X</p>
             <br></br>
-            <img src={mine} alt="mine" class="w-36 h-36 rounded-3xl"></img>
+            <img src={mine} alt="mine" class="w-38 h-36 rounded-3xl"></img>
             <br></br>
             <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
