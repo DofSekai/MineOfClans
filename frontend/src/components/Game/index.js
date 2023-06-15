@@ -17,20 +17,24 @@ import config from '../../config.js';
 import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import updateOre from "../../business/updateOre"
 
 export default function Game(){
   
   const location = useLocation();
   const [name, setName] = useState('');
+  const [id_village, setIdVillage] = useState('');
+  const [lastUpdate, setLastUpdate] = useState(0);
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search); 
     setName(searchParams.get('name'));
   }, [location.search]);
 
-
   const [user_irons, setIron] = useState('');
   const [user_diamond, setDiamond] = useState('');
   const [user_emerauld, setEmerauld] = useState('');
+
   const [user_golem, setGolem] = useState('');
   const [user_wall, setWall] = useState('');
   //const [user_tour, setTour] = useState('');
@@ -65,20 +69,29 @@ export default function Game(){
         //setMaxWall(response.data[i].village.wallMaxRate); 
         //setTour(response.data[i].village.tour);
         //setMaxTour(response.data[i].village.tourMaxRate);
-      } else {
+      } 
+      else {
         console.log("erreur")
       }
-    }
+      }
+      })
+      .catch(error => {
+        // Gérez les erreurs de la requête ici
+        console.error(error);
+      });
     
-    })
-    .catch(error => {
-      // Gérez les erreurs de la requête ici
-      console.error(error);
-    });
-  })
+    }, [name, lastUpdate]);
   
-
-  
+   
+  async function handleClick() {
+    try {
+        await updateOre(id_village);
+        setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
+    }
+  }
+    
 
 return(
 
@@ -118,7 +131,7 @@ return(
       </div>
       <br></br>
       <br></br>
-      <img src={mineButton} alt="mine" class="w-36 h-34"></img>
+      <img src={mineButton} onClick={handleClick} alt="mine" class="w-36 h-34"></img>
       <p> CLIQUER POUR MINER </p>
 
       <br></br>
