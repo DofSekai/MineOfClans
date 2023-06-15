@@ -109,15 +109,28 @@ return(
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
             <p>Niveau Mine : X</p>
             <br></br>
-            <img src={mine} alt="mine" class="w-38 h-36 rounded-3xl"></img>
+            <div id="mine" class="mx-5"><img src={mine} alt="mine" class="w-38 h-36 rounded-3xl"></img></div>
+            <div class="mr-50">
+              <ul class="list-disc ml-8" id="stock_mine">
+                <li>Max fer :</li>
+                <li>Max diamant : </li>
+                <li>Max émeraude : </li>
+              </ul>
+            </div>
             <br></br>
             <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
             <p>Niveau HDV : X</p>
             <br></br>
-            <img src={hdv} alt="hdv" class="w-36 h-36"></img>  
-            <br></br>          
+            <div id="hdv" class="mx-5"><img src={hdv} alt="hdv" class="w-36 h-36"></img></div>  
+            <div class="mr-50">
+              <ul class="list-disc ml-8" id="stock_hdv">
+                <li>Max golems :</li>
+                <li>Max murailles : </li>
+              </ul>
+            </div>
+            <br></br><br></br>     
             <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
         
@@ -140,7 +153,7 @@ return(
         <div>
           <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center"></img>
           <div class="sorcier-container">
-            <p class="pe-2">100</p><img src={emerauld} class="w-8"></img>
+            <p class="pe-2">90</p><img src={emerauld} class="w-8"></img>
         </div>
         </div>
       </div>          
