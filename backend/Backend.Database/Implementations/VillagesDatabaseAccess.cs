@@ -23,5 +23,11 @@ namespace Business.Database.Implementations {
             _databaseContext.villages.Add(village);
             await _databaseContext.SaveChangesAsync();
         }
+
+        public async Task Update(int id) {
+            var village = await GetById(id);
+            _databaseContext.villages.Update(village);
+            await _databaseContext.SaveChangesAsync();
+        }
     }
 }

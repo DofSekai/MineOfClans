@@ -51,7 +51,7 @@ namespace Backend.Database {
             villageBuilder.Property(x => x.GolemLevel)
                 .HasColumnType("integer")
                 .HasDefaultValue(0);
-            villageBuilder.Property(x => x.LastUpdate).HasColumnType("float");
+            villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
         }
     }
 }
