@@ -53,7 +53,9 @@ namespace Backend.Database {
             villageBuilder.Property(x => x.GolemLevel)
                 .HasColumnType("integer")
                 .HasDefaultValue(0);
-            villageBuilder.HasOne(x => x.LevelMine);
+            villageBuilder.HasOne(x => x.LevelMine)
+                .WithMany()
+                .HasForeignKey(x => x.LevelMineId);
             villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
 
             levelMineBuilder.HasKey(x => x.Id);

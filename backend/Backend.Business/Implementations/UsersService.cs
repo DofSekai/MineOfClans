@@ -69,7 +69,7 @@ namespace Backend.Business.Implementations {
             try {
                 await _usersDataAccess.Create(user.ToDAO());
 
-                return user;
+                return (await _usersDataAccess.SearchByName(request.Name)).FirstOrDefault()?.ToDto();
             } catch (Exception e) {
                 _logger.LogError(e.Message);
                 _logger.LogError(e.StackTrace);
