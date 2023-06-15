@@ -31,16 +31,24 @@ export default function Game(){
   const [user_irons, setIron] = useState('');
   const [user_diamond, setDiamond] = useState('');
   const [user_emerauld, setEmerauld] = useState('');
+  const [user_golem, setGolem] = useState('');
+  const [user_wall, setWall] = useState('');
+  //const [user_tour, setTour] = useState('');
 
   const [max_irons, setMaxIron] = useState('');
   const [max_diamond, setMaxDiamond] = useState('');
   const [max_emerauld, setMaxEmerauld] = useState('');
+  //const [max_golem, setMaxGolem] = useState('');
+  //const [max_wall, setMaxWall] = useState('');
+  //const [max_tour, setMaxTour] = useState('');
 
   const [levelMine, setLevelMine] = useState('');
+  const [levelHDV, setLevelHDV] = useState('');
 
   //stockage + stock max
-  axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
-  .then(response => {
+  useEffect(() => {
+    axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
+    .then(response => {
     for(let i = 0; i < response.data.length; i++){
       if(response.data[i].name == {name}.name){
         setIron(response.data[i].village.irons);
@@ -50,16 +58,25 @@ export default function Game(){
         setMaxDiamond(response.data[i].village.levelMine.diamondMaxRate);
         setMaxEmerauld(response.data[i].village.levelMine.emeraldMaxRate);
         setLevelMine(response.data[i].village.levelMineId);
+        setLevelHDV(response.data[i].village.levelHDV);
+        setGolem(response.data[i].village.golems);
+        setWall(response.data[i].village.walls);
+        //setMaxGolem(response.data[i].village.golemMaxRate);
+        //setMaxWall(response.data[i].village.wallMaxRate); 
+        //setTour(response.data[i].village.tour);
+        //setMaxTour(response.data[i].village.tourMaxRate);
       } else {
         console.log("erreur")
       }
     }
     
+    })
+    .catch(error => {
+      // Gérez les erreurs de la requête ici
+      console.error(error);
+    });
   })
-  .catch(error => {
-    // Gérez les erreurs de la requête ici
-    console.error(error);
-  });
+  
 
   
 
@@ -133,13 +150,14 @@ return(
             <button class="bg-lime-500 text-white rounded-xl p-1">Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
-            <p>Niveau HDV : X</p>
+            <p>Niveau HDV : {levelHDV} </p>
             <br></br>
             <div id="hdv" class="mx-5"><img src={hdv} alt="hdv" class="w-36 h-36"></img></div>  
             <div class="mr-50">
               <ul class="list-disc ml-8" id="stock_hdv">
-                <li>Max golems :</li>
+                <li>Max golems : </li>
                 <li>Max murailles : </li>
+                <li>Max tours : </li>
               </ul>
             </div>
             <br></br><br></br>     
@@ -153,19 +171,19 @@ return(
         <div>
           <img src={golem} alt="golem" class="w-26 h-40 text-center"></img>
           <div class="golem-container">
-            <p class="pe-2">100</p><img src={iron} class="w-8"></img>
+            <p class="pe-2">600</p><img src={iron} class="w-8"></img>
         </div>
         </div>
         <div>
           <img src={murailles} alt="murailles" class="w-26 h-40 text-center"></img>
           <div class="murailles-container">
-          <p class="pe-2">30 </p> <img src={diamond} class="w-8"></img>
+          <p class="pe-2">50 </p> <img src={diamond} class="w-8"></img>
           </div>
         </div>
         <div>
           <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center"></img>
           <div class="sorcier-container">
-            <p class="pe-2">90</p><img src={emerauld} class="w-8"></img>
+            <p class="pe-2">100</p><img src={emerauld} class="w-8"></img>
         </div>
         </div>
       </div>          
@@ -178,12 +196,12 @@ return(
         <img src={golem} alt="golem" class="w-26 h-52"></img>
       </div>
       <br></br>
-      <p class="px-4 text-center">Nombre de Golems : 0</p>
+      <p class="px-4 text-center">Nombre de Golems : {user_golem}</p>
       <div class="flex justify-center my-10">
         <img src={murailles} alt="murailles" class="w-26 h-52"></img>
       </div>
       <br></br>
-      <p class="px-4 text-center">Nombre de murailles : 0</p>
+      <p class="px-4 text-center">Nombre de murailles : {user_wall}</p>
     </div>
   </div>
 </section>   
