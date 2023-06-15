@@ -50,3 +50,21 @@
   align-items: center;
   margin-left : 30%;
 }
+
+#mine{
+  float :left;
+}
+
+#stock_mine{
+  list-style-type: none;
+  font-size : 18px;
+}
+
+#hdv{
+  float :left;
+}
+
+#stock_hdv{
+  list-style-type: none;
+  font-size : 18px;
+}
