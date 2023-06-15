@@ -7,6 +7,7 @@ namespace Backend.Database {
     public class DatabaseContext : DbContext {
         public DbSet<User> users { get; set; }
         public DbSet<Village> villages { get; set; }
+        public DbSet<LevelMine> levelMines { get; set; }
 
         private readonly string ConnectionString;
         
@@ -21,6 +22,7 @@ namespace Backend.Database {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             var userBuilder = modelBuilder.Entity<User>();
             var villageBuilder = modelBuilder.Entity<Village>();
+            var levelMineBuilder = modelBuilder.Entity<LevelMine>();
 
             userBuilder.HasKey(x => x.Id);
 
@@ -51,7 +53,17 @@ namespace Backend.Database {
             villageBuilder.Property(x => x.GolemLevel)
                 .HasColumnType("integer")
                 .HasDefaultValue(0);
+            villageBuilder.HasOne(x => x.LevelMine)
+                .WithMany()
+                .HasForeignKey(x => x.LevelMineId);
             villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
+
+            levelMineBuilder.HasKey(x => x.Id);
+            
+            levelMineBuilder.Property(x => x.Id).HasColumnType("integer");
+            levelMineBuilder.Property(x => x.IronRate).HasColumnType("integer");
+            levelMineBuilder.Property(x => x.DiamondRate).HasColumnType("integer");
+            levelMineBuilder.Property(x => x.EmeraldRate).HasColumnType("integer");
         }
     }
 }

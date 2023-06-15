@@ -2,17 +2,20 @@
 using Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Backend.Database.Migrations
+namespace Business.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230615075035_updateLevelMineToVillageAddForeignKey")]
+    partial class updateLevelMineToVillageAddForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +104,7 @@ namespace Backend.Database.Migrations
                     b.Property<int>("LastUpdate")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LevelMineId")
+                    b.Property<int>("LevelMinId")
                         .HasColumnType("integer");
 
                     b.Property<int>("WallLevel")
@@ -111,7 +114,7 @@ namespace Backend.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LevelMineId");
+                    b.HasIndex("LevelMinId");
 
                     b.ToTable("villages");
                 });
@@ -131,7 +134,7 @@ namespace Backend.Database.Migrations
                 {
                     b.HasOne("Backend.Common.DAO.LevelMine", "LevelMine")
                         .WithMany()
-                        .HasForeignKey("LevelMineId")
+                        .HasForeignKey("LevelMinId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
