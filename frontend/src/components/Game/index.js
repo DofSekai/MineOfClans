@@ -17,11 +17,13 @@ import config from '../../config.js';
 import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import updateOre from "../../business/updateOre"
 
 export default function Game(){
   
   const location = useLocation();
   const [name, setName] = useState('');
+  const [lastUpdate, setLastUpdate] = useState(0);
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search); 
     setName(searchParams.get('name'));
@@ -31,24 +33,38 @@ export default function Game(){
   const [user_irons, setIron] = useState('');
   const [user_diamond, setDiamond] = useState('');
   const [user_emerauld, setEmerauld] = useState('');
+  const [id_village, setIdVillage] = useState('');
 
-  axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
-  .then(response => {
-    for(let i = 0; i < response.data.length; i++){
-      if(response.data[i].name == {name}.name){
-        setIron(response.data[i].village.irons);
-        setDiamond(response.data[i].village.diamonds);
-        setEmerauld(response.data[i].village.emeralds);
-      } else {
-        console.log("erreur pseudooo")
+  useEffect(() => {
+    axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
+    .then(response => {
+      for(let i = 0; i < response.data.length; i++){
+        if(response.data[i].name == name){
+          setIdVillage(response.data[i].village.id)
+          setIron(response.data[i].village.irons);
+          setDiamond(response.data[i].village.diamonds);
+          setEmerauld(response.data[i].village.emeralds);
+        } else {
+          console.log("erreur pseudooo")
+        }
       }
+     })
+      .catch(error => {
+        // Gérez les erreurs de la requête ici
+        console.error(error);
+      });
+    }, [name, lastUpdate]);
+  
+
+
+  async function handleClick() {
+    try {
+        await updateOre(id_village);
+        setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
     }
-    
-  })
-  .catch(error => {
-    // Gérez les erreurs de la requête ici
-    console.error(error);
-  });
+}
 
 
 return(
@@ -89,7 +105,7 @@ return(
       </div>
       <br></br>
       <br></br>
-      <img src={mineButton} alt="mine" class="w-36 h-34"></img>
+      <img src={mineButton} onClick={handleClick} alt="mine" class="w-36 h-34"></img>
       <p> CLIQUER POUR MINER </p>
 
       <br></br>
