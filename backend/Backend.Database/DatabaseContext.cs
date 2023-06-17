@@ -8,7 +8,8 @@ namespace Backend.Database {
         public DbSet<User> users { get; set; }
         public DbSet<Village> villages { get; set; }
         public DbSet<LevelMine> levelMines { get; set; }
-        public DbSet<LevelHdv> LevelHdvs { get; set; }
+        public DbSet<LevelHdv> levelHdvs { get; set; }
+        public DbSet<RankupMine> rankupMines { get; set; }
 
         private readonly string ConnectionString;
         
@@ -25,6 +26,7 @@ namespace Backend.Database {
             var villageBuilder = modelBuilder.Entity<Village>();
             var levelMineBuilder = modelBuilder.Entity<LevelMine>();
             var levelHdvBuilder = modelBuilder.Entity<LevelHdv>();
+            var rankupMinesBuilder = modelBuilder.Entity<RankupMine>();
 
             userBuilder.HasKey(x => x.Id);
 
@@ -82,6 +84,13 @@ namespace Backend.Database {
             levelHdvBuilder.Property(x => x.MaxGolems).HasColumnType("integer");
             levelHdvBuilder.Property(x => x.MaxTowers).HasColumnType("integer");
             levelHdvBuilder.Property(x => x.MaxWalls).HasColumnType("integer");
+            
+            rankupMinesBuilder.HasKey(x => x.Id);
+            
+            rankupMinesBuilder.Property(x => x.Id).HasColumnType("integer");
+            rankupMinesBuilder.Property(x => x.Irons).HasColumnType("integer");
+            rankupMinesBuilder.Property(x => x.Diamonds).HasColumnType("integer");
+            rankupMinesBuilder.Property(x => x.Emeralds).HasColumnType("integer");
         }
     }
 }

@@ -36,11 +36,13 @@ builder.Services.AddTransient<DatabaseContext>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IVillagesService, VillagesService>();
 builder.Services.AddTransient<ILevelMinesService, LevelMinesService>();
+builder.Services.AddTransient<IRankupMinesService, RankupMinesService>();
 
 // Data
 builder.Services.AddTransient<IUsersDataAccess, UsersDatabaseAccess>();
 builder.Services.AddTransient<IVillagesDataAccess, VillagesDatabaseAccess>();
 builder.Services.AddTransient<ILevelMinesDataAccess, LevelMinesDatabaseAccess>();
+builder.Services.AddTransient<IRankupMinesDataAccess, RankupMinesDatabaseAccess>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
