@@ -7,5 +7,10 @@ namespace Business.Database.Interfaces {
         Task<Village?> GetById(int id);
         Task Create(Village village);
         Task Update(int id);
+        Task UpdateGolem(int id);
+        Task UpdateWall(int id);
+        Task UpdateTower(int id);
+        Task UpdateHdv(int id);
+        Task UpdateMine(int id);
     }
 }
