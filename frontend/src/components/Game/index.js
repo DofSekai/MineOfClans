@@ -78,7 +78,6 @@ export default function Game(){
         setTour(response.data[i].village.towers);
         setMaxTour(response.data[i].village.levelHdv.maxTowers);
         
-
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
         .then(response => {
           console.log(response.data);

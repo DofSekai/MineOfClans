@@ -4,18 +4,23 @@ using Backend.Database.Interfaces;
 using Business.Database.Interfaces;
 using Microsoft.Extensions.Logging;
 using LevelMine = Backend.Common.DAO.LevelMine;
+using LevelHdv = Backend.Common.DAO.LevelHdv;
 
 namespace Backend.Business.Implementations {
     public class VillagesService : IVillagesService {
         private readonly IVillagesDataAccess _villagesDataAccess;
         private readonly ILevelMinesDataAccess _levelMinesDataAccess;
         private readonly IRankupMinesDataAccess _rankupMinesDataAccess;
+        private readonly ILevelHdvsDataAccess _levelHdvsDataAccess;
+        private readonly IRankupHdvsDataAccess _rankupHdvsDataAccess;
         private readonly ILogger<VillagesService> _logger;
         
-        public VillagesService(IVillagesDataAccess villagesDataAccess, IRankupMinesDataAccess rankupMinesDataAccess, ILevelMinesDataAccess levelMinesDataAccess, ILogger<VillagesService> logger) {
+        public VillagesService(IVillagesDataAccess villagesDataAccess, IRankupMinesDataAccess rankupMinesDataAccess, IRankupHdvsDataAccess rankupHdvsDataAccess, ILevelMinesDataAccess levelMinesDataAccess, ILevelHdvsDataAccess levelHdvsDataAccess, ILogger<VillagesService> logger) {
             _villagesDataAccess = villagesDataAccess;
             _rankupMinesDataAccess = rankupMinesDataAccess;
+            _rankupHdvsDataAccess = rankupHdvsDataAccess;
             _levelMinesDataAccess = levelMinesDataAccess;
+            _levelHdvsDataAccess = levelHdvsDataAccess;
             _logger = logger;
         }
         
@@ -66,6 +71,7 @@ namespace Backend.Business.Implementations {
             int NewLastUpdate = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
             int Multiplicator = NewLastUpdate - LastUpdate;
             LevelMine LevelMine = village.LevelMine;
+            LevelHdv LevelHdv = village.LevelHdv;
             int IronRate = LevelMine.IronRate;
             int DiamondRate = LevelMine.DiamondRate;
             int EmeraldRate = LevelMine.EmeraldRate;
@@ -98,6 +104,7 @@ namespace Backend.Business.Implementations {
                 village.Emeralds = EmeraldMaxRate;
             }
 
+            // Update Mine
             var RankupMine = await _rankupMinesDataAccess.GetById(LevelMine.Id);
             if (RankupMine != null)
             {
@@ -116,7 +123,45 @@ namespace Backend.Business.Implementations {
                 }
             }
 
+            // Update HDV
+            var RankupHdv = await _rankupHdvsDataAccess.GetById(LevelHdv.Id);
+            if (RankupHdv != null)
+            {
+
+                if (village.Irons >= RankupHdv.Irons && village.Diamonds >= RankupHdv.Diamonds &&
+                    village.Emeralds >= RankupHdv.Emeralds)
+                {
+                    LevelHdv NextLevelHdv = await _levelHdvsDataAccess.GetById(village.LevelHdvId + 1);
+                    
+                    if (NextLevelHdv != null)
+                    {
+                        village.Irons -= RankupHdv.Irons;
+                        village.Diamonds -= RankupHdv.Diamonds;
+                        village.Emeralds -= RankupHdv.Emeralds;
+                        village.LevelHdv = NextLevelHdv;
+                    }
+                }
+            }
+            
+            // Update SHOP
             village.LastUpdate = NewLastUpdate;
+            if (village.Irons >= 600 && village.Golems <= village.LevelHdv.MaxGolems)
+            {
+                village.Golems += 1;
+                village.Irons -= 600;
+            }
+            
+            if (village.Diamonds >= 50 && village.Walls <= village.LevelHdv.MaxWalls)
+            {
+                village.Walls += 1;
+                village.Diamonds -= 50;
+            }
+            
+            if (village.Emeralds >= 100 && village.Towers <= village.LevelHdv.MaxTowers)
+            {
+                village.Towers += 1;
+                village.Emeralds -= 100;
+            }
 
             await _villagesDataAccess.Update(village.Id);
         }
