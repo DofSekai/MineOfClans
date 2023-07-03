@@ -49,8 +49,6 @@ export default function Game(){
   const [levelMine, setLevelMine] = useState('');
   const [levelHdv, setLevelHdv] = useState('');
 
-  const [prix_mine, setPrixMine] = useState('');
-  const [prix_hdv, setPrixHDV] = useState('');
 
   const [irons_rankup_mine, setIronMine] = useState('');
   const [diamond_rankup_mine, setDiamondMine] = useState('');
@@ -62,7 +60,7 @@ export default function Game(){
     .then(response => {
     for(let i = 0; i < response.data.length; i++){
       if(response.data[i].name == {name}.name){
-        setIdVillage(response.data[i].village.id)
+        setIdVillage(response.data[i].village.id);
         setIron(response.data[i].village.irons);
         setDiamond(response.data[i].village.diamonds);
         setEmerauld(response.data[i].village.emeralds);
@@ -79,16 +77,12 @@ export default function Game(){
         setTour(response.data[i].village.towers);
         setMaxTour(response.data[i].village.levelHdv.maxTowers);
         
-        setPrixMine(response.data[i].village.levelMine.ironMaxRate);
-
-
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
         .then(response => {
           console.log(response.data);
           setIronMine(response.data.irons);
           setDiamondMine(response.data.diamonds);
-          setEmeraldMine(response.data.emeralds);
-          
+          setEmeraldMine(response.data.emeralds);          
         });
               
       } 
@@ -201,7 +195,7 @@ return(
               </ul>
             </div>
             <br></br><br></br>     
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={prix_hdv}>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" >
               Upgrade</button>
         </div>
         
