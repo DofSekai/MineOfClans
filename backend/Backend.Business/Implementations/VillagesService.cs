@@ -143,7 +143,25 @@ namespace Backend.Business.Implementations {
                 }
             }
             
+            // Update SHOP
             village.LastUpdate = NewLastUpdate;
+            if (village.Irons >= 600 && village.Golems <= village.LevelHdv.MaxGolems)
+            {
+                village.Golems += 1;
+                village.Irons -= 600;
+            }
+            
+            if (village.Diamonds >= 50 && village.Walls <= village.LevelHdv.MaxWalls)
+            {
+                village.Walls += 1;
+                village.Diamonds -= 50;
+            }
+            
+            if (village.Emeralds >= 100 && village.Towers <= village.LevelHdv.MaxTowers)
+            {
+                village.Towers += 1;
+                village.Emeralds -= 100;
+            }
 
             await _villagesDataAccess.Update(village.Id);
         }
