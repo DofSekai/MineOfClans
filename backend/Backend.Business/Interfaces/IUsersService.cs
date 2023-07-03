@@ -7,5 +7,6 @@ namespace Backend.Business.Interfaces
         Task<User?> GetById(int id);
         Task<IEnumerable<User>> SearchByName(string name);
         Task<User> Create(UserCreationRequest user);
+        Task<IEnumerable<User>> GetRanking(CancellationToken cancellationToken);
     }
 }

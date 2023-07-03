@@ -76,5 +76,21 @@ namespace Backend.Business.Implementations {
                 throw;
             }
         }
+        
+        public async Task<IEnumerable<User>> GetRanking(CancellationToken cancellationToken) {
+            try {
+                List<User> users = new List<User>();
+                await foreach (var user in _usersDataAccess.GetRanking()) {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    users.Add(user.ToDto());
+                }
+
+                return users;
+            } catch (Exception e) {
+                _logger.LogError(e.Message);
+                _logger.LogError(e.StackTrace);
+                throw;
+            }
+        }
     }
 }

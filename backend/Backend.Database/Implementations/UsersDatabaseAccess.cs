@@ -34,5 +34,13 @@ namespace Backend.Database.Implementations {
             _databaseContext.users.Add(user);
             await _databaseContext.SaveChangesAsync();
         }
+        
+        public IAsyncEnumerable<User> GetRanking() {
+            return _databaseContext.users
+                .OrderByDescending(x=> x.Village.LevelHdvId).ThenBy(x => x.Id)
+                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
+                .Include(x => x.Village).ThenInclude(x => x.LevelHdv)
+                .AsAsyncEnumerable();
+        }
     }
 }

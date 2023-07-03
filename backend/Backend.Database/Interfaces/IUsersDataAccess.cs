@@ -6,5 +6,6 @@ namespace Backend.Database.Interfaces {
         Task<User?> GetById(int id);
         Task<IEnumerable<User>> SearchByName(string name);
         Task Create(User user);
+        IAsyncEnumerable<User> GetRanking();
     }
 }

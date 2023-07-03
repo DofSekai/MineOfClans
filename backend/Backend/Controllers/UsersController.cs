@@ -48,5 +48,11 @@ namespace Backend.Controllers {
                 return BadRequest(ex.Message);
             }
         }
+        
+        [HttpGet("ranking")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<User>>> GetRanking(CancellationToken cancellationToken = default) {
+            return Ok(await _usersService.GetRanking(cancellationToken));
+        }
     }
 }
