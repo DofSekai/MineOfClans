@@ -60,7 +60,7 @@ export default function Game(){
     .then(response => {
     for(let i = 0; i < response.data.length; i++){
       if(response.data[i].name == {name}.name){
-        setIdVillage(response.data[i].village.id)
+        setIdVillage(response.data[i].village.id);
         setIron(response.data[i].village.irons);
         setDiamond(response.data[i].village.diamonds);
         setEmerauld(response.data[i].village.emeralds);
@@ -77,8 +77,6 @@ export default function Game(){
         setTour(response.data[i].village.towers);
         setMaxTour(response.data[i].village.levelHdv.maxTowers);
         
-       
-
 
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
         .then(response => {
