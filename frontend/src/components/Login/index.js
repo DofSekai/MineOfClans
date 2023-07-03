@@ -1,8 +1,33 @@
 import '../../index.css';
 import test from "../../img/player_head.png"
+import dof from "../../img/dof.png"
+import ply from "../../img/plynox.png"
+import miss from "../../img/misswe.png"
 import getUsers from '../../business/getUsers';
 import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+
+const RandomChoiceComponent = () => {
+  const getRandomChoice = () => {
+    const randomNumber = Math.floor(Math.random() * 4) + 1;
+
+    if (randomNumber === 1) {
+      return dof;
+    } else if (randomNumber === 2) {
+      return ply;
+    }
+     else {
+      return miss;
+    }
+  };
+
+  const randomChoice = getRandomChoice();
+  return (
+    <img className="w-45 h-24" src={randomChoice} alt="Image" />
+  );
+};
+
+
 
 export default function Login() {
     const [users, setUsers] = useState([]);
@@ -27,12 +52,12 @@ export default function Login() {
             <br></br>
             <hr></hr>
             <br></br>
-            <div class=" bg-gray-100 py-9 flex flex-col justify-center sm:py-12">
+            <div class=" bg-slate-100 rounded-full py-9 flex flex-col justify-center sm:py-12">
                 <div class="grid grid-cols-3 gap-4">
                    
                         {users.map(user => (
                              <div class="flex flex-col items-center">
-                                <a href={`http://localhost:3000/game?name=${encodeURIComponent(user.name)}`}><img class="w-24 h-24" src={test} alt="Profile" />
+                                <a href={`http://localhost:3000/game?name=${encodeURIComponent(user.name)}`}> <RandomChoiceComponent />
                                 <h3 class="text-center mt-2">{user.name}</h3></a>
                             </div>
                            
