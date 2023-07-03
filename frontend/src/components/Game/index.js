@@ -47,7 +47,7 @@ export default function Game(){
   const [max_tour, setMaxTour] = useState('');
 
   const [levelMine, setLevelMine] = useState('');
-  const [levelHdv, setLevelHdv] = useState('');
+  const [levelHDV, setLevelHDV] = useState('');
 
   const [prix_mine, setPrixMine] = useState('');
   const [prix_hdv, setPrixHDV] = useState('');
@@ -57,6 +57,7 @@ export default function Game(){
   const [emerald_rankup_mine, setEmeraldMine] = useState('');
 
   //stockage + stock max
+
   useEffect(() => {
     axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
     .then(response => {
@@ -71,13 +72,16 @@ export default function Game(){
         setMaxDiamond(response.data[i].village.levelMine.diamondMaxRate);
         setMaxEmerauld(response.data[i].village.levelMine.emeraldMaxRate);
         setLevelMine(response.data[i].village.levelMineId);
-        setLevelHdv(response.data[i].village.levelHdvId);
+        setLevelHDV(response.data[i].village.levelHDVId);
         setGolem(response.data[i].village.golems);
         setWall(response.data[i].village.walls);
+        setMaxGolem(response.data[i].village.levelHDV.maxGolems);
+        setMaxWall(response.data[i].village.levelHDV.maxWalls); 
         setMaxGolem(response.data[i].village.levelHdv.maxGolems);
         setMaxWall(response.data[i].village.levelHdv.maxWalls);
+
         setTour(response.data[i].village.towers);
-        setMaxTour(response.data[i].village.levelHdv.maxTowers);
+        setMaxTour(response.data[i].village.levelHDV.maxTowers);
         
         setPrixMine(response.data[i].village.levelMine.ironMaxRate);
 
@@ -189,7 +193,7 @@ return(
               Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
-            <p>Niveau HDV : {levelHdv} </p>
+            <p>Niveau HDV : {levelHDV} </p>
             <br></br>
             <div id="hdv" class="mx-5"><img src={hdv} alt="hdv" class="w-36 h-36"></img></div>  
             <div class="mr-50">
