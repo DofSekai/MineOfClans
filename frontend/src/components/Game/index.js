@@ -63,6 +63,7 @@ export default function Game(){
     .then(response => {
     for(let i = 0; i < response.data.length; i++){
       if(response.data[i].name == {name}.name){
+        console.log(response.data)
         setIdVillage(response.data[i].village.id)
         setIron(response.data[i].village.irons);
         setDiamond(response.data[i].village.diamonds);
@@ -75,16 +76,18 @@ export default function Game(){
         setLevelHDV(response.data[i].village.levelHDVId);
         setGolem(response.data[i].village.golems);
         setWall(response.data[i].village.walls);
-        setMaxGolem(response.data[i].village.levelHDV.maxGolems);
-        setMaxWall(response.data[i].village.levelHDV.maxWalls); 
+        setMaxGolem(response.data[i].village.levelHdv.maxGolems);
+        setMaxWall(response.data[i].village.levelHdv.maxWalls); 
         setMaxGolem(response.data[i].village.levelHdv.maxGolems);
         setMaxWall(response.data[i].village.levelHdv.maxWalls);
 
         setTour(response.data[i].village.towers);
-        setMaxTour(response.data[i].village.levelHDV.maxTowers);
+        setMaxTour(response.data[i].village.levelHdv.maxTowers);
         
         setPrixMine(response.data[i].village.levelMine.ironMaxRate);
-
+        
+        console.log("test")
+        console.log(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
 
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
         .then(response => {
