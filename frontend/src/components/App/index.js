@@ -49,16 +49,11 @@ fetchUsers();
             </div>
             <div class="flex flex-col items-center backdrop-blur-sm">
               <h1 class="text-3xl">Classement des joueurs : </h1>
-              {users.map((user,index) => (
-                <>
-                   <div key={user.id} className="flex items-center mt-2">
-                      {index < 3 && <img src={trophee} alt="Image" className="w-16" />}
-                      <h2 className="text-xl text-center text-white font-extrabold">{user.name} : Level {user.village.levelHdv.id}</h2>
-                    </div>
-                  
-                </>
-
-                              
+              {users.length > 0 && users.map((user, index) => (
+                <div key={user.id} className="flex items-center mt-2">
+                  {index < 3 && <img src={trophee} alt="Image" className="w-16" />}
+                  <h2 className="text-xl text-center text-white font-extrabold">{user.name} : Level {user.village.levelHdv.id}</h2>
+                </div>
               ))}
               </div>
         </section>
