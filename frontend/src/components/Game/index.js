@@ -47,17 +47,14 @@ export default function Game(){
   const [max_tour, setMaxTour] = useState('');
 
   const [levelMine, setLevelMine] = useState('');
-  const [levelHDV, setLevelHDV] = useState('');
+  const [levelHdv, setLevelHdv] = useState('');
 
-  const [prix_mine, setPrixMine] = useState('');
-  const [prix_hdv, setPrixHDV] = useState('');
 
   const [irons_rankup_mine, setIronMine] = useState('');
   const [diamond_rankup_mine, setDiamondMine] = useState('');
   const [emerald_rankup_mine, setEmeraldMine] = useState('');
 
   //stockage + stock max
-
   useEffect(() => {
     axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
     .then(response => {
@@ -72,21 +69,18 @@ export default function Game(){
         setMaxDiamond(response.data[i].village.levelMine.diamondMaxRate);
         setMaxEmerauld(response.data[i].village.levelMine.emeraldMaxRate);
         setLevelMine(response.data[i].village.levelMineId);
-        setLevelHDV(response.data[i].village.levelHDVId);
+        setLevelHdv(response.data[i].village.levelHdvId);
         setGolem(response.data[i].village.golems);
         setWall(response.data[i].village.walls);
-        setMaxGolem(response.data[i].village.levelHDV.maxGolems);
-        setMaxWall(response.data[i].village.levelHDV.maxWalls); 
         setMaxGolem(response.data[i].village.levelHdv.maxGolems);
         setMaxWall(response.data[i].village.levelHdv.maxWalls);
-
         setTour(response.data[i].village.towers);
-        setMaxTour(response.data[i].village.levelHDV.maxTowers);
+        setMaxTour(response.data[i].village.levelHdv.maxTowers);
         
-        setPrixMine(response.data[i].village.levelMine.ironMaxRate);
+       
 
 
-        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.id}`)
+        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
         .then(response => {
           console.log(response.data);
           setIronMine(response.data.irons);
@@ -194,7 +188,7 @@ return(
               Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
-            <p>Niveau HDV : {levelHDV} </p>
+            <p>Niveau HDV : {levelHdv} </p>
             <br></br>
             <div id="hdv" class="mx-5"><img src={hdv} alt="hdv" class="w-36 h-36"></img></div>  
             <div class="mr-50">
@@ -205,7 +199,7 @@ return(
               </ul>
             </div>
             <br></br><br></br>     
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={prix_hdv}>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" >
               Upgrade</button>
         </div>
         

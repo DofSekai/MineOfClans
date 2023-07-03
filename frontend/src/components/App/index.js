@@ -4,6 +4,7 @@ import './index.css';
 //import Game from '../Game';
 import logo from "../../img/logo.png"
 import '../../accueil.css'
+import React from 'react';
 import RankingComponent from '../Ranking/index';
 
 export default function App() {
@@ -30,10 +31,7 @@ export default function App() {
                 <Link to="/login"><button className="bg-red-500 rounded-xl p-4 w-20 text-white">Login</button> </Link>
                 <Link to="/register" className="bg-blue-500 rounded-xl p-4 w-28 text-white"><button>Register</button> </Link>
             </div>
-            <div>
-              <RankingComponent />
-            </div >
-
+            <RankingComponent />
         </section>
   );
 }
