@@ -18,6 +18,11 @@ import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import updateOre from "../../business/updateOre"
+import updateMine from "../../business/updateMine"
+import updateHdv from "../../business/updateHdv"
+import updateGolem from "../../business/updateGolem"
+import updateWall from "../../business/updateWall"
+import updateTower from "../../business/updateTower"
 
 export default function Game(){
   
@@ -113,6 +118,51 @@ export default function Game(){
     }
   }
 
+  async function handleClickMine() {
+    try {
+        await updateMine(id_village);
+        setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
+    }
+  }
+
+  async function handleClickHdv() {
+    try {
+        await updateHdv(id_village);
+        setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
+    }
+  }
+
+  async function handleClickGolem() {
+    try {
+        await updateGolem(id_village);
+        setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
+    }
+  }
+
+  async function handleClickWall() {
+    try {
+        await updateWall(id_village);
+        setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
+    }
+  }
+
+  async function handleClickTower() {
+    try {
+        await updateTower(id_village);
+        setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
+    }
+  }
+
 return(
 
 <section class="bg-gradient-to-tr from-sky-600 font-serif text-white">
@@ -180,7 +230,7 @@ return(
               </ul>
             </div>
             <br></br>
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={test_title}>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={test_title} onClick={handleClickMine}>
               Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
@@ -195,7 +245,7 @@ return(
               </ul>
             </div>
             <br></br><br></br>     
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" >
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" onClick={handleClickHdv}>
               Upgrade</button>
         </div>
         
@@ -204,19 +254,19 @@ return(
         <p>Shop :</p>
         <div class="image-container">
         <div>
-          <img src={golem} alt="golem" class="w-26 h-40 text-center hover:border"></img>
+          <img src={golem} alt="golem" class="w-26 h-40 text-center hover:border" onClick={handleClickGolem}></img>
           <div class="golem-container">
             <p class="pe-2">600</p><img src={iron} class="w-8"></img>
         </div>
         </div>
         <div>
-          <img src={murailles} alt="murailles" class="w-26 h-40 text-center hover:border"></img>
+          <img src={murailles} alt="murailles" class="w-26 h-40 text-center hover:border" onClick={handleClickWall}></img>
           <div class="murailles-container">
           <p class="pe-2">50 </p> <img src={diamond} class="w-8"></img>
           </div>
         </div>
         <div>
-          <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center hover:border"></img>
+          <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center hover:border" onClick={handleClickTower}></img>
           <div class="sorcier-container">
             <p class="pe-2">100</p><img src={emerauld} class="w-8"></img>
         </div>
