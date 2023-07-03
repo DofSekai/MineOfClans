@@ -85,8 +85,7 @@ export default function Game(){
           console.log(response.data);
           setIronMine(response.data.irons);
           setDiamondMine(response.data.diamonds);
-          setEmeraldMine(response.data.emeralds);
-          
+          setEmeraldMine(response.data.emeralds);          
         });
               
       } 
