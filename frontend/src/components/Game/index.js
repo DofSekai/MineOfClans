@@ -52,6 +52,10 @@ export default function Game(){
   const [prix_mine, setPrixMine] = useState('');
   const [prix_hdv, setPrixHDV] = useState('');
 
+  const [irons_rankup_mine, setIronMine] = useState('');
+  const [diamond_rankup_mine, setDiamondMine] = useState('');
+  const [emerald_rankup_mine, setEmeraldMine] = useState('');
+
   //stockage + stock max
   useEffect(() => {
     axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
@@ -71,17 +75,28 @@ export default function Game(){
         setGolem(response.data[i].village.golems);
         setWall(response.data[i].village.walls);
         setMaxGolem(response.data[i].village.levelHdv.maxGolems);
-        setMaxWall(response.data[i].village.levelHdv.maxWalls); 
+        setMaxWall(response.data[i].village.levelHdv.maxWalls);
         setTour(response.data[i].village.towers);
         setMaxTour(response.data[i].village.levelHdv.maxTowers);
         
         setPrixMine(response.data[i].village.levelMine.ironMaxRate);
-        
+
+
+        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.id}`)
+        .then(response => {
+          console.log(response.data);
+          setIronMine(response.data.irons);
+          setDiamondMine(response.data.diamonds);
+          setEmeraldMine(response.data.emeralds);
+          
+        });
+              
       } 
       else {
         console.log("erreur")
       }
       }
+
       })
       .catch(error => {
         // Gérez les erreurs de la requête ici
@@ -90,7 +105,9 @@ export default function Game(){
     
     }, [name, lastUpdate]);
 
-    
+
+   
+    const test_title = `irons : ${irons_rankup_mine} | diamond : ${diamond_rankup_mine} | emerald : ${emerald_rankup_mine}`
   
    
   async function handleClick() {
@@ -101,7 +118,6 @@ export default function Game(){
         console.log(e);
     }
   }
-    
 
 return(
 
@@ -170,7 +186,7 @@ return(
               </ul>
             </div>
             <br></br>
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={prix_mine}>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={test_title}>
               Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
