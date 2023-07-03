@@ -60,8 +60,7 @@ export default function Game(){
     .then(response => {
     for(let i = 0; i < response.data.length; i++){
       if(response.data[i].name == {name}.name){
-        console.log(response.data)
-        setIdVillage(response.data[i].village.id)
+        setIdVillage(response.data[i].village.id);
         setIron(response.data[i].village.irons);
         setDiamond(response.data[i].village.diamonds);
         setEmerauld(response.data[i].village.emeralds);
