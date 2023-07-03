@@ -59,6 +59,10 @@ export default function Game(){
   const [diamond_rankup_mine, setDiamondMine] = useState('');
   const [emerald_rankup_mine, setEmeraldMine] = useState('');
 
+  const [irons_rankup_hdv, setIronHdv] = useState('');
+  const [diamond_rankup_hdv, setDiamondHdv] = useState('');
+  const [emerald_rankup_hdv, setEmeraldHdv] = useState('');
+
   //stockage + stock max
   useEffect(() => {
     axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
@@ -89,6 +93,14 @@ export default function Game(){
           setDiamondMine(response.data.diamonds);
           setEmeraldMine(response.data.emeralds);          
         });
+
+        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupHdvs/${response.data[i].village.levelHdvId}`)
+        .then(response => {
+          console.log(response.data);
+          setIronHdv(response.data.irons);
+          setDiamondHdv(response.data.diamonds);
+          setEmeraldHdv(response.data.emeralds);          
+        });
               
       } 
       else {
@@ -106,7 +118,8 @@ export default function Game(){
 
 
    
-    const test_title = `irons : ${irons_rankup_mine} | diamond : ${diamond_rankup_mine} | emerald : ${emerald_rankup_mine}`
+    const rankupmine_title = `irons : ${irons_rankup_mine} | diamond : ${diamond_rankup_mine} | emerald : ${emerald_rankup_mine}`
+    const rankuphdv_title = `irons : ${irons_rankup_hdv} | diamond : ${diamond_rankup_hdv} | emerald : ${emerald_rankup_hdv}`
   
    
   async function handleClick() {
@@ -230,7 +243,7 @@ return(
               </ul>
             </div>
             <br></br>
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={test_title} onClick={handleClickMine}>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={rankupmine_title} onClick={handleClickMine}>
               Upgrade</button>
         </div>
         <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
@@ -245,7 +258,7 @@ return(
               </ul>
             </div>
             <br></br><br></br>     
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" onClick={handleClickHdv}>
+            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={rankuphdv_title} onClick={handleClickHdv}>
               Upgrade</button>
         </div>
         
