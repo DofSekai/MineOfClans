@@ -82,7 +82,7 @@ export default function Game(){
         setPrixMine(response.data[i].village.levelMine.ironMaxRate);
 
 
-        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.id}`)
+        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
         .then(response => {
           console.log(response.data);
           setIronMine(response.data.irons);
