@@ -135,7 +135,6 @@ namespace Backend.Business.Implementations {
                     
                     if (NextLevelHdv != null)
                     {
-                        Console.WriteLine("OKKKK");
                         village.Irons -= RankupHdv.Irons;
                         village.Diamonds -= RankupHdv.Diamonds;
                         village.Emeralds -= RankupHdv.Emeralds;
