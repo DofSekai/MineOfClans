@@ -8,6 +8,7 @@ namespace Backend.Database;
 public class DatabaseContext : DbContext 
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Village> Villages { get; set; }
 
     private readonly string _connectionString;
         
@@ -31,6 +32,20 @@ public class DatabaseContext : DbContext
             .HasMaxLength(255)
             .IsUnicode(true)
             .HasColumnType("varchar");
+        userBuilder.HasMany(x => x.Villages)
+            .WithOne(x => x.User);
             
+        var villageBuilder = modelBuilder.Entity<Village>();
+        
+        villageBuilder.HasKey(x => x.Id);
+        
+        villageBuilder.Property(x => x.Id).HasColumnType("integer");
+        villageBuilder.Property(x => x.Name)
+            .HasMaxLength(255)
+            .IsUnicode(true)
+            .HasColumnType("varchar");
+        villageBuilder.HasOne(x => x.User)  
+            .WithMany(x => x.Villages)
+            .HasForeignKey(x => x.UserId);
     }
 }
