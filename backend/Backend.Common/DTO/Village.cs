@@ -42,6 +42,8 @@ public static class VillageDAOtoDTOHelper
             Towers = originalVillage.Towers,
             LevelMineId = originalVillage.LevelMineId,
             LevelMine = originalVillage.LevelMine.ToDto(),
+            LevelHdvId = originalVillage.LevelHdvId,
+            LevelHdv = originalVillage.LevelHdv.ToDto(),
             LastUpdate = originalVillage.LastUpdate
         };
     }
@@ -59,6 +61,7 @@ public static class VillageDAOtoDTOHelper
             Walls = originalVillage.Walls,
             Towers = originalVillage.Towers,
             LevelMineId = originalVillage.LevelMineId,
+            LevelHdvId = originalVillage.LevelHdvId,
             LastUpdate = originalVillage.LastUpdate
         };
     }

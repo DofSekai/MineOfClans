@@ -8,4 +8,5 @@ public interface IVillagesService {
     Task<Village?> GetById(int id);
     Task<IEnumerable<Village>> SearchByName(string name);
     Task<Village> Create(VillageCreationRequest village);
+    Task Update(int id);
 }

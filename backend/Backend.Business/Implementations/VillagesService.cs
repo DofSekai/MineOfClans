@@ -121,4 +121,50 @@ public class VillagesService : IVillagesService
             throw;
         }
     }
+    
+    public async Task Update(int id)
+    {
+        var village = await _villagesDataAccess.GetById(id);
+        int NewLastUpdate = (int)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+        int Multiplicator = NewLastUpdate - village.LastUpdate;
+        
+        LevelMine LevelMine = village.LevelMine;
+        int IronRate = LevelMine.IronRate;
+        int DiamondRate = LevelMine.DiamondRate;
+        int EmeraldRate = LevelMine.EmeraldRate;
+        int IronMaxRate = LevelMine.IronMaxRate;
+        int DiamondMaxRate = LevelMine.DiamondMaxRate;
+        int EmeraldMaxRate = LevelMine.EmeraldMaxRate;
+
+        if (village.Irons + Multiplicator * IronRate < IronMaxRate)
+        {
+            village.Irons += Multiplicator * IronRate;
+        }
+        else
+        {
+            village.Irons = IronMaxRate;
+        }
+
+        if (village.Diamonds + Multiplicator * DiamondRate < DiamondMaxRate)
+        {
+            village.Diamonds += Multiplicator * DiamondRate;
+        }
+        else
+        {
+            village.Diamonds = DiamondMaxRate;
+        }
+
+        if (village.Emeralds + Multiplicator * EmeraldRate < EmeraldMaxRate)
+        {
+            village.Emeralds += Multiplicator * EmeraldRate;
+        }
+        else
+        {
+            village.Emeralds = EmeraldMaxRate;
+        }
+
+        village.LastUpdate = NewLastUpdate;
+
+        await _villagesDataAccess.Update(village.Id);
+    }
 }
