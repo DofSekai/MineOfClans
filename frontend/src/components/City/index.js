@@ -7,6 +7,7 @@ import village from "../../img/village.png"
 import axios from "axios"
 import config from '../../config.js';
 
+
 export default function City(){
     const location = useLocation();
     const [name, setName] = useState('');
@@ -18,12 +19,10 @@ export default function City(){
         setName(searchParams.get('name'));
     }, [location.search]);
     
-   console.log("ok"+name);
    
     useEffect(() => {
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/Users/search/${name}`)
         .then(response => {
-            console.log(response);
             setId(response.data[0].id);          
         });
     });
@@ -48,6 +47,8 @@ export default function City(){
         fetchCity();
       }, [id]);
   
+      
+
   return(
   
   <section class="">

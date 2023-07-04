@@ -14,7 +14,11 @@ import axios from "axios"
 import config from '../../config.js';
 
 import levelup from "../../sound/levelup.mp3"
-import pnj from "../../sound/levelup.mp3"
+import pnj from "../../sound/pnj.mp3"
+import witch from "../../sound/witch.mp3"
+import damage from "../../sound/damage.mp3"
+import chevre from "../../sound/chevre.ogg"
+import ghast from "../../sound/ghast.mp3"
 
 
 import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
@@ -115,7 +119,6 @@ export default function Game(){
    
   async function handleClick() {
     try {
-      console.log(`r-${id_village}`);
         await updateOre(id_village);
         setLastUpdate(Date.now())
     } catch (e) {
@@ -127,6 +130,9 @@ export default function Game(){
     try {
         if(parseInt(user_irons) > parseInt(irons_rankup_mine) && parseInt(user_diamond) > parseInt(diamond_rankup_mine) && parseInt(user_emerauld) > parseInt(emerald_rankup_mine) && parseInt(levelMine) < 10){
           let audio = new Audio(levelup);
+          audio.play();
+        }else{
+          let audio = new Audio(ghast);
           audio.play();
         }
         await updateMine(id_village);
@@ -142,6 +148,9 @@ export default function Game(){
       if(parseInt(user_irons) > parseInt(irons_rankup_hdv) && parseInt(user_diamond) > parseInt(diamond_rankup_hdv) && parseInt(user_emerauld) > parseInt(emerald_rankup_hdv) && parseInt(levelHdv) < 5){
         let audio = new Audio(levelup);
         audio.play();
+      }else{
+        let audio = new Audio(ghast);
+        audio.play();
       }
         await updateHdv(id_village);
         setLastUpdate(Date.now())
@@ -152,9 +161,11 @@ export default function Game(){
 
   async function handleClickGolem() {
     try {
-        await updateGolem(id_village);
+      if(parseInt(user_golem) < parseInt(max_golem) && parseInt(user_irons) > 600 ){
         let audio = new Audio(pnj);
         audio.play();
+      }
+        await updateGolem(id_village);
         setLastUpdate(Date.now())
     } catch (e) {
         console.log(e);
@@ -163,6 +174,10 @@ export default function Game(){
 
   async function handleClickWall() {
     try {
+      if(parseInt(user_wall) < parseInt(max_wall) && parseInt(user_diamond) > 50 ){
+        let audio = new Audio(chevre);
+        audio.play();
+      }
         await updateWall(id_village);
         setLastUpdate(Date.now())
     } catch (e) {
@@ -172,8 +187,21 @@ export default function Game(){
 
   async function handleClickTower() {
     try {
+      if(parseInt(user_tour) < parseInt(max_tour) && parseInt(user_emerauld) > 100 ){
+        let audio = new Audio(witch);
+        audio.play();
+      }
         await updateTower(id_village);
         setLastUpdate(Date.now())
+    } catch (e) {
+        console.log(e);
+    }
+  }
+
+  async function handleClickDeco() {
+    try {
+      let audio = new Audio(damage);
+      audio.play();
     } catch (e) {
         console.log(e);
     }
@@ -186,7 +214,7 @@ return(
 <br></br>
             <hr></hr>
             <br></br>
-            <Link to="/login"><button id="btn_deco">Déconnexion</button> </Link>
+            <Link to="/login"><button id="btn_deco" onClick={handleClickDeco}>Déconnexion</button> </Link>
             <Link to={`/city?name=${name}`}><button id="btn_deco">Villages</button> </Link>
             <div class="flex items-center justify-center">
               <img src={logo} alt="Logo" class="test"></img>

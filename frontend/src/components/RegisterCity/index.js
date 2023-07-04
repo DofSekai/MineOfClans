@@ -10,8 +10,7 @@ export default function RegisterCity() {
     const [id_pseudo, setIdPseudo] = useState('');
     const [namecity, setCity] = useState(""); // �tat local pour stocker la valeur de l'input
     const navigate = useNavigate();
-    const location = useLocation();
-
+    
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search); 
         setPseudo(searchParams.get('name'));
