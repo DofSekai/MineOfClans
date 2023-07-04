@@ -11,6 +11,7 @@ public class DatabaseContext : DbContext
     public DbSet<Village> Villages { get; set; }
     public DbSet<LevelMine> LevelMines { get; set; }
     public DbSet<LevelHdv> LevelHdvs { get; set; }
+    public DbSet<RankupMine> RankupMines { get; set; }
 
     private readonly string _connectionString;
         
@@ -83,5 +84,14 @@ public class DatabaseContext : DbContext
         levelHdvBuilder.Property(x => x.MaxGolems).HasColumnType("integer");
         levelHdvBuilder.Property(x => x.MaxTowers).HasColumnType("integer");
         levelHdvBuilder.Property(x => x.MaxWalls).HasColumnType("integer");
+        
+        var rankupMinesBuilder = modelBuilder.Entity<RankupMine>();
+        
+        rankupMinesBuilder.HasKey(x => x.Id);
+            
+        rankupMinesBuilder.Property(x => x.Id).HasColumnType("integer");
+        rankupMinesBuilder.Property(x => x.Irons).HasColumnType("integer");
+        rankupMinesBuilder.Property(x => x.Diamonds).HasColumnType("integer");
+        rankupMinesBuilder.Property(x => x.Emeralds).HasColumnType("integer");
     }
 }
