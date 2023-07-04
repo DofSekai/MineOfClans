@@ -188,7 +188,7 @@ export default function Game(){
 
 return(
 
-<section class="bg-gradient-to-tr from-sky-600 font-serif text-white">
+<section class="bg-gradient-to-tr backdrop-blur-sm font-serif text-white">
 
 <br></br>
             <hr></hr>
@@ -196,15 +196,15 @@ return(
             <Link to="/login"><button id="btn_deco">Déconnexion</button> </Link>
             <div class="flex items-center justify-center">
               <img src={logo} alt="Logo" class="test"></img>
-            <h1 class="font-bold text-3xl">MineOfClans</h1>         
+            <h1 class="font-bold text-3xl text-green-950">MineOfClans</h1>         
             </div>
             <br></br>
-            <h1 class="font-bold text-2xl">Bienvenue {name} !</h1>   
+            <h1 class="font-bold text-2xl text-green-950">Bienvenue {name} !</h1>   
             <br></br>
             <hr></hr>
             <br></br>
 
-<div class="flex h-screen">
+<div id="fond" class="flex h-screen">
     <div class="w-1/4 h-full border-2 border-white p-4">
       <h1 class="text-center text-2xl font-bold p-4">MINE</h1>
       <br></br>
