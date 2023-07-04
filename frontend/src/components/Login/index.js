@@ -57,7 +57,7 @@ export default function Login() {
                    
                         {users.map(user => (
                              <div class="flex flex-col items-center">
-                                <a href={`http://localhost:3000/game?name=${encodeURIComponent(user.name)}`}> <RandomChoiceComponent />
+                                <a href={`http://localhost:3000/city?name=${encodeURIComponent(user.name)}`}> <RandomChoiceComponent />
                                 <h3 class="text-center mt-2">{user.name}</h3></a>
                             </div>
                            
