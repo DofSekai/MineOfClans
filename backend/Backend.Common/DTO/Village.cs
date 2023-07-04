@@ -15,8 +15,13 @@ public class Village
     public int Golems { get; set; }
     public int Walls { get; set; }
     public int Towers { get; set; }
-    [JsonIgnore] public int LevelMineId { get; set; } = 1;
+    [JsonIgnore] 
+    public int LevelMineId { get; set; } = 1;
     public LevelMine LevelMine { get; set; }
+    [JsonIgnore]
+    public int LevelHdvId { get; set; } = 1;
+        
+    public LevelHdv LevelHdv { get; set; }
     public int LastUpdate { get; set; } = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
 }
     
