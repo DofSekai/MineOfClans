@@ -66,6 +66,9 @@ public class DatabaseContext : DbContext
         villageBuilder.HasOne(x => x.LevelMine)
             .WithMany()
             .HasForeignKey(x => x.LevelMineId);
+        villageBuilder.HasOne(x => x.LevelHdv)
+            .WithMany()
+            .HasForeignKey(x => x.LevelHdvId);
         villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
         
         var levelMineBuilder = modelBuilder.Entity<LevelMine>();
