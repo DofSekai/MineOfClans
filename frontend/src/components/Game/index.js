@@ -66,59 +66,48 @@ export default function Game(){
   const [irons_rankup_hdv, setIronHdv] = useState('');
   const [diamond_rankup_hdv, setDiamondHdv] = useState('');
   const [emerald_rankup_hdv, setEmeraldHdv] = useState('');
-
-  //stockage + stock max
+  
   useEffect(() => {
-    axios.get('http://localhost:'+config.SWAGGER_PORT+'/api/Users')
+    axios.get(`http://localhost:${config.SWAGGER_PORT}/api/Villages/search/${name_village}`)
     .then(response => {
-    for(let i = 0; i < response.data.length; i++){
-      if(response.data[i].name == {name}.name){
-        setIdVillage(response.data[i].village.id);
-        setIron(response.data[i].village.irons);
-        setDiamond(response.data[i].village.diamonds);
-        setEmerauld(response.data[i].village.emeralds);
-        setIdVillage(response.data[i].village.id);
-        setMaxIron(response.data[i].village.levelMine.ironMaxRate);
-        setMaxDiamond(response.data[i].village.levelMine.diamondMaxRate);
-        setMaxEmerauld(response.data[i].village.levelMine.emeraldMaxRate);
-        setLevelMine(response.data[i].village.levelMineId);
-        setLevelHdv(response.data[i].village.levelHdvId);
-        setGolem(response.data[i].village.golems);
-        setWall(response.data[i].village.walls);
+        setIdVillage(response.data[0].id);   
+        setIron(response.data[0].irons);
+        setDiamond(response.data[0].diamonds);
+        setEmerauld(response.data[0].emeralds);
+        setMaxIron(response.data[0].levelMine.ironMaxRate);
+        setMaxDiamond(response.data[0].levelMine.diamondMaxRate);
+        setMaxEmerauld(response.data[0].levelMine.emeraldMaxRate);
+        setLevelMine(response.data[0].levelMine.id);
+        setLevelHdv(response.data[0].levelHdv.id);
+        setGolem(response.data[0].golems);
+        setWall(response.data[0].walls);
 
-        setMaxGolem(response.data[i].village.levelHdv.maxGolems);
-        setMaxWall(response.data[i].village.levelHdv.maxWalls);
-        setTour(response.data[i].village.towers);
-        setMaxTour(response.data[i].village.levelHdv.maxTowers);
-        
-        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
+        setMaxGolem(response.data[0].levelHdv.maxGolems);
+        setMaxWall(response.data[0].levelHdv.maxWalls);
+        setTour(response.data[0].towers);
+        setMaxTour(response.data[0].levelHdv.maxTowers);
+
+        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[0].levelMine.id}`)
         .then(response => {
           setIronMine(response.data.irons);
           setDiamondMine(response.data.diamonds);
           setEmeraldMine(response.data.emeralds);          
         });
 
-        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupHdvs/${response.data[i].village.levelHdvId}`)
+        axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupHdvs/${response.data[0].levelHdv.id}`)
         .then(response => {
           setIronHdv(response.data.irons);
           setDiamondHdv(response.data.diamonds);
           setEmeraldHdv(response.data.emeralds);          
         });
-              
-      } 
-      else {
-        console.log("erreur")
-      }
-      }
-
-      })
-      .catch(error => {
-        // Gérez les erreurs de la requête ici
-        console.error(error);
-      });
-    
-    }, [name, lastUpdate]);
-
+    })
+    .catch(error => {
+      // Gérez les erreurs de la requête ici
+      console.error(error);
+    });
+  }, [name_village, lastUpdate]);
+  
+  
 
    
     const rankupmine_title = `irons : ${irons_rankup_mine} | diamond : ${diamond_rankup_mine} | emerald : ${emerald_rankup_mine}`
@@ -127,6 +116,7 @@ export default function Game(){
    
   async function handleClick() {
     try {
+      console.log(`r-${id_village}`);
         await updateOre(id_village);
         setLastUpdate(Date.now())
     } catch (e) {
