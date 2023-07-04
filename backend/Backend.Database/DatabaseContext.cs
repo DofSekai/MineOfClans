@@ -63,6 +63,9 @@ public class DatabaseContext : DbContext
             .HasDefaultValue(0);
         villageBuilder.Property(x => x.Towers).HasColumnType("integer")
             .HasDefaultValue(0);
+        villageBuilder.HasOne(x => x.LevelMine)
+            .WithMany()
+            .HasForeignKey(x => x.LevelMineId);
         villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
         
         var levelMineBuilder = modelBuilder.Entity<LevelMine>();
