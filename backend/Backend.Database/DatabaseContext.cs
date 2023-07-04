@@ -1,9 +1,7 @@
 using Backend.Common;
-using Backend.Common.DTO;
+using Backend.Common.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using User = Backend.Common.DAO.User;
-using Village = Backend.Common.DAO.Village;
 
 namespace Backend.Database;
     
@@ -11,6 +9,7 @@ public class DatabaseContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Village> Villages { get; set; }
+    public DbSet<LevelMine> LevelMines { get; set; }
 
     private readonly string _connectionString;
         
@@ -62,5 +61,17 @@ public class DatabaseContext : DbContext
         villageBuilder.Property(x => x.Towers).HasColumnType("integer")
             .HasDefaultValue(0);
         villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
+        
+        var levelMineBuilder = modelBuilder.Entity<LevelMine>();
+        
+        levelMineBuilder.HasKey(x => x.Id);
+            
+        levelMineBuilder.Property(x => x.Id).HasColumnType("integer");
+        levelMineBuilder.Property(x => x.IronRate).HasColumnType("integer");
+        levelMineBuilder.Property(x => x.DiamondRate).HasColumnType("integer");
+        levelMineBuilder.Property(x => x.EmeraldRate).HasColumnType("integer");
+        levelMineBuilder.Property(x => x.IronMaxRate).HasColumnType("integer");
+        levelMineBuilder.Property(x => x.DiamondMaxRate).HasColumnType("integer");
+        levelMineBuilder.Property(x => x.EmeraldMaxRate).HasColumnType("integer");
     }
 }

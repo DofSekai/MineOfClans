@@ -2,6 +2,7 @@ using Backend.Business.Interfaces;
 using Backend.Common.DTO;
 using Backend.Database.Interfaces;
 using Microsoft.Extensions.Logging;
+using LevelMine = Backend.Common.DAO.LevelMine;
 
 namespace Backend.Business.Implementations;
 

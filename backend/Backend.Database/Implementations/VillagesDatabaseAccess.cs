@@ -46,4 +46,11 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
         _databaseContext.Villages.Add(village);
         await _databaseContext.SaveChangesAsync();
     }
+    
+    public async Task Update(int id) 
+    {
+        var village = await GetById(id);
+        _databaseContext.Villages.Update(village);
+        await _databaseContext.SaveChangesAsync();
+    }
 }
