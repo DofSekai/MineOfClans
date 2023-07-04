@@ -14,6 +14,7 @@ import axios from "axios"
 import config from '../../config.js';
 
 import levelup from "../../sound/levelup.mp3"
+import pnj from "../../sound/levelup.mp3"
 
 
 import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
@@ -108,8 +109,6 @@ export default function Game(){
   }, [name_village, lastUpdate]);
   
   
-
-   
     const rankupmine_title = `irons : ${irons_rankup_mine} | diamond : ${diamond_rankup_mine} | emerald : ${emerald_rankup_mine}`
     const rankuphdv_title = `irons : ${irons_rankup_hdv} | diamond : ${diamond_rankup_hdv} | emerald : ${emerald_rankup_hdv}`
   
@@ -154,6 +153,8 @@ export default function Game(){
   async function handleClickGolem() {
     try {
         await updateGolem(id_village);
+        let audio = new Audio(pnj);
+        audio.play();
         setLastUpdate(Date.now())
     } catch (e) {
         console.log(e);
