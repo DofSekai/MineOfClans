@@ -16,6 +16,8 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
     {
         return _databaseContext.Villages
             .Include(x => x.User)
+            .Include(x => x.LevelMine)
+            .Include(x => x.LevelHdv)
             .AsAsyncEnumerable();
     }
     
@@ -23,6 +25,8 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
     {
         return _databaseContext.Villages
             .Include(x => x.User)
+            .Include(x => x.LevelMine)
+            .Include(x => x.LevelHdv)
             .Where(x=> x.User.Id == id)
             .AsAsyncEnumerable();
     }
@@ -31,6 +35,8 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
     {
         return await _databaseContext.Villages
             .Include(x => x.User)
+            .Include(x => x.LevelMine)
+            .Include(x => x.LevelHdv)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
@@ -38,6 +44,8 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
     {
         return Task.FromResult<IEnumerable<Village>>(_databaseContext.Villages
             .Include(x => x.User)
+            .Include(x => x.LevelMine)
+            .Include(x => x.LevelHdv)
             .Where(x => x.Name.Contains(name)));
     }
 
@@ -52,5 +60,30 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
         var village = await GetById(id);
         _databaseContext.Villages.Update(village);
         await _databaseContext.SaveChangesAsync();
+    }
+    
+    public async Task UpdateMine(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateHdv(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateGolem(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateWall(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateTower(int id)
+    {
+        await Update(id);
     }
 }

@@ -10,4 +10,9 @@ public interface IVillagesDataAccess
     Task<IEnumerable<Village>> SearchByName(string name);
     Task Create(Village village);
     Task Update(int id);
+    Task UpdateMine(int id);
+    Task UpdateHdv(int id);
+    Task UpdateGolem(int id);
+    Task UpdateWall(int id);
+    Task UpdateTower(int id);
 }

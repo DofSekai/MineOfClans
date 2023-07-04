@@ -2,6 +2,7 @@
 using Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230704154232_AddLevelMineToVillage")]
+    partial class AddLevelMineToVillage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,9 +171,6 @@ namespace Backend.Database.Migrations
                     b.Property<int>("LastUpdate")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LevelHdvId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("LevelMineId")
                         .HasColumnType("integer");
 
@@ -195,8 +195,6 @@ namespace Backend.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LevelHdvId");
-
                     b.HasIndex("LevelMineId");
 
                     b.HasIndex("UserId");
@@ -206,12 +204,6 @@ namespace Backend.Database.Migrations
 
             modelBuilder.Entity("Backend.Common.DAO.Village", b =>
                 {
-                    b.HasOne("Backend.Common.DAO.LevelHdv", "LevelHdv")
-                        .WithMany()
-                        .HasForeignKey("LevelHdvId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Backend.Common.DAO.LevelMine", "LevelMine")
                         .WithMany()
                         .HasForeignKey("LevelMineId")
@@ -223,8 +215,6 @@ namespace Backend.Database.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("LevelHdv");
 
                     b.Navigation("LevelMine");
 
