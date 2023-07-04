@@ -31,11 +31,13 @@ export default function Game(){
   const location = useLocation();
   const [name, setName] = useState('');
   const [id_village, setIdVillage] = useState('');
+  const [name_village, setNomVillage] = useState('');
   const [lastUpdate, setLastUpdate] = useState(0);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search); 
     setName(searchParams.get('name'));
+    setNomVillage(searchParams.get('village'));
   }, [location.search]);
 
   const [user_irons, setIron] = useState('');
@@ -200,7 +202,7 @@ return(
             <h1 class="font-bold text-3xl text-green-950">MineOfClans</h1>         
             </div>
             <br></br>
-            <h1 class="font-bold text-2xl text-green-950">Bienvenue {name} !</h1>   
+            <h1 class="font-bold text-2xl text-green-950">Bienvenue {name} à {name_village} !</h1>   
             <br></br>
             <hr></hr>
             <br></br>

@@ -32,7 +32,7 @@ export default function RegisterCity() {
                 "name": namecity, 
                 "userId": id_pseudo
             });
-            navigate(`/game?name=${pseudo}?village=${namecity}`);
+            navigate(`/game?name=${pseudo}&village=${namecity}`);
         } catch (e) {
             alert(e);
         }

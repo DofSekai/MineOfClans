@@ -16,8 +16,8 @@ export default function City(){
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search); 
         setName(searchParams.get('name'));
-        
     }, [location.search]);
+    
    console.log("ok"+name);
    
     useEffect(() => {
