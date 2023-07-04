@@ -13,6 +13,8 @@ import sorcier from "../../img/sorcier.png"
 import axios from "axios"
 import config from '../../config.js';
 
+import levelup from "../../sound/levelup.mp3"
+
 
 import { BrowserRouter as  Router, Route, Routes, Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -81,6 +83,7 @@ export default function Game(){
         setLevelHdv(response.data[i].village.levelHdvId);
         setGolem(response.data[i].village.golems);
         setWall(response.data[i].village.walls);
+
         setMaxGolem(response.data[i].village.levelHdv.maxGolems);
         setMaxWall(response.data[i].village.levelHdv.maxWalls);
         setTour(response.data[i].village.towers);
@@ -88,7 +91,6 @@ export default function Game(){
         
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupMines/${response.data[i].village.levelMineId}`)
         .then(response => {
-          console.log(response.data);
           setIronMine(response.data.irons);
           setDiamondMine(response.data.diamonds);
           setEmeraldMine(response.data.emeralds);          
@@ -96,7 +98,6 @@ export default function Game(){
 
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/RankupHdvs/${response.data[i].village.levelHdvId}`)
         .then(response => {
-          console.log(response.data);
           setIronHdv(response.data.irons);
           setDiamondHdv(response.data.diamonds);
           setEmeraldHdv(response.data.emeralds);          
@@ -133,8 +134,13 @@ export default function Game(){
 
   async function handleClickMine() {
     try {
+        if(parseInt(user_irons) > parseInt(irons_rankup_mine) && parseInt(user_diamond) > parseInt(diamond_rankup_mine) && parseInt(user_emerauld) > parseInt(emerald_rankup_mine) && parseInt(levelMine) < 10){
+          let audio = new Audio(levelup);
+          audio.play();
+        }
         await updateMine(id_village);
         setLastUpdate(Date.now())
+        
     } catch (e) {
         console.log(e);
     }
@@ -142,6 +148,10 @@ export default function Game(){
 
   async function handleClickHdv() {
     try {
+      if(parseInt(user_irons) > parseInt(irons_rankup_hdv) && parseInt(user_diamond) > parseInt(diamond_rankup_hdv) && parseInt(user_emerauld) > parseInt(emerald_rankup_hdv) && parseInt(levelHdv) < 5){
+        let audio = new Audio(levelup);
+        audio.play();
+      }
         await updateHdv(id_village);
         setLastUpdate(Date.now())
     } catch (e) {
@@ -178,7 +188,7 @@ export default function Game(){
 
 return(
 
-<section class="bg-gradient-to-tr from-sky-600 font-serif text-white">
+<section class="bg-gradient-to-tr backdrop-blur-sm font-serif text-white">
 
 <br></br>
             <hr></hr>
@@ -187,15 +197,15 @@ return(
             <Link to={`/city?name=${name}`}><button id="btn_deco">Villages</button> </Link>
             <div class="flex items-center justify-center">
               <img src={logo} alt="Logo" class="test"></img>
-            <h1 class="font-bold text-3xl">MineOfClans</h1>         
+            <h1 class="font-bold text-3xl text-green-950">MineOfClans</h1>         
             </div>
             <br></br>
-            <h1 class="font-bold text-2xl">Bienvenue {name} !</h1>   
+            <h1 class="font-bold text-2xl text-green-950">Bienvenue {name} !</h1>   
             <br></br>
             <hr></hr>
             <br></br>
 
-<div class="flex h-screen">
+<div id="fond" class="flex h-screen">
     <div class="w-1/4 h-full border-2 border-white p-4">
       <h1 class="text-center text-2xl font-bold p-4">MINE</h1>
       <br></br>
@@ -306,6 +316,5 @@ return(
 </section>   
 
 );
-
 
 }
