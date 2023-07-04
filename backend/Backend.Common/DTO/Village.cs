@@ -9,6 +9,9 @@ public class Village
     [JsonIgnore]
     public int UserId { get; set; }
     public User User { get; set; }
+    public int Irons { get; set; }
+    public int Diamonds { get; set; }
+    public int Emeralds { get; set; }
     public int Golems { get; set; }
     public int Walls { get; set; }
     public int Towers { get; set; }
@@ -24,6 +27,9 @@ public static class VillageDAOtoDTOHelper
             Name = originalVillage.Name,
             UserId = originalVillage.UserId,
             User = originalVillage.User.ToDto(),
+            Irons = originalVillage.Irons,
+            Diamonds = originalVillage.Diamonds,
+            Emeralds = originalVillage.Emeralds,
             Golems = originalVillage.Golems,
             Walls = originalVillage.Walls,
             Towers = originalVillage.Towers,
@@ -37,6 +43,9 @@ public static class VillageDAOtoDTOHelper
             Id = originalVillage.Id,
             Name = originalVillage.Name,
             UserId = originalVillage.UserId,
+            Irons = originalVillage.Irons,
+            Diamonds = originalVillage.Diamonds,
+            Emeralds = originalVillage.Emeralds,
             Golems = originalVillage.Golems,
             Walls = originalVillage.Walls,
             Towers = originalVillage.Towers,

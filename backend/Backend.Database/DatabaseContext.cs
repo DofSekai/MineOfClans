@@ -49,9 +49,18 @@ public class DatabaseContext : DbContext
         villageBuilder.HasOne(x => x.User)  
             .WithMany(x => x.Villages)
             .HasForeignKey(x => x.UserId);
-        villageBuilder.Property(x => x.Golems).HasColumnType("integer");
-        villageBuilder.Property(x => x.Walls).HasColumnType("integer");
-        villageBuilder.Property(x => x.Towers).HasColumnType("integer");
+        villageBuilder.Property(x => x.Irons).HasColumnType("integer")
+            .HasDefaultValue(30);
+        villageBuilder.Property(x => x.Diamonds).HasColumnType("integer")
+            .HasDefaultValue(20);
+        villageBuilder.Property(x => x.Emeralds).HasColumnType("integer")
+            .HasDefaultValue(10);
+        villageBuilder.Property(x => x.Golems).HasColumnType("integer")
+            .HasDefaultValue(0);
+        villageBuilder.Property(x => x.Walls).HasColumnType("integer")
+            .HasDefaultValue(0);
+        villageBuilder.Property(x => x.Towers).HasColumnType("integer")
+            .HasDefaultValue(0);
         villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
     }
 }
