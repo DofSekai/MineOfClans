@@ -12,6 +12,7 @@ public class DatabaseContext : DbContext
     public DbSet<LevelMine> LevelMines { get; set; }
     public DbSet<LevelHdv> LevelHdvs { get; set; }
     public DbSet<RankupMine> RankupMines { get; set; }
+    public DbSet<RankupHdv> RankupHdvs { get; set; }
 
     private readonly string _connectionString;
         
@@ -93,5 +94,14 @@ public class DatabaseContext : DbContext
         rankupMinesBuilder.Property(x => x.Irons).HasColumnType("integer");
         rankupMinesBuilder.Property(x => x.Diamonds).HasColumnType("integer");
         rankupMinesBuilder.Property(x => x.Emeralds).HasColumnType("integer");
+        
+        var rankupHdvsBuilder = modelBuilder.Entity<RankupHdv>();
+        
+        rankupHdvsBuilder.HasKey(x => x.Id);
+            
+        rankupHdvsBuilder.Property(x => x.Id).HasColumnType("integer");
+        rankupHdvsBuilder.Property(x => x.Irons).HasColumnType("integer");
+        rankupHdvsBuilder.Property(x => x.Diamonds).HasColumnType("integer");
+        rankupHdvsBuilder.Property(x => x.Emeralds).HasColumnType("integer");
     }
 }
