@@ -184,6 +184,7 @@ return(
             <hr></hr>
             <br></br>
             <Link to="/login"><button id="btn_deco">Déconnexion</button> </Link>
+            <Link to={`/city?name=${name}`}><button id="btn_deco">Villages</button> </Link>
             <div class="flex items-center justify-center">
               <img src={logo} alt="Logo" class="test"></img>
             <h1 class="font-bold text-3xl">MineOfClans</h1>         

@@ -17,7 +17,7 @@ export default function Register() {
             await createUser({
                 "name": pseudo // Utiliser la valeur de l'input
             });
-            navigate(`/game?name=${pseudo}`);
+            navigate(`/registercity?name=${pseudo}`);
         } catch (e) {
             alert(e);
         }
