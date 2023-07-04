@@ -1,7 +1,9 @@
-using Backend.Common.DAO;
 using Backend.Common;
+using Backend.Common.DTO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using User = Backend.Common.DAO.User;
+using Village = Backend.Common.DAO.Village;
 
 namespace Backend.Database;
     
@@ -47,5 +49,9 @@ public class DatabaseContext : DbContext
         villageBuilder.HasOne(x => x.User)  
             .WithMany(x => x.Villages)
             .HasForeignKey(x => x.UserId);
+        villageBuilder.Property(x => x.Golems).HasColumnType("integer");
+        villageBuilder.Property(x => x.Walls).HasColumnType("integer");
+        villageBuilder.Property(x => x.Towers).HasColumnType("integer");
+        villageBuilder.Property(x => x.LastUpdate).HasColumnType("integer");
     }
 }

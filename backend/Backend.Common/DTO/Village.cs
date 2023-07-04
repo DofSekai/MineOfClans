@@ -9,6 +9,10 @@ public class Village
     [JsonIgnore]
     public int UserId { get; set; }
     public User User { get; set; }
+    public int Golems { get; set; }
+    public int Walls { get; set; }
+    public int Towers { get; set; }
+    public int LastUpdate { get; set; } = (int) (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
 }
     
 public static class VillageDAOtoDTOHelper 
@@ -19,7 +23,11 @@ public static class VillageDAOtoDTOHelper
             Id = originalVillage.Id,
             Name = originalVillage.Name,
             UserId = originalVillage.UserId,
-            User = originalVillage.User.ToDto()
+            User = originalVillage.User.ToDto(),
+            Golems = originalVillage.Golems,
+            Walls = originalVillage.Walls,
+            Towers = originalVillage.Towers,
+            LastUpdate = originalVillage.LastUpdate
         };
     }
 
@@ -28,7 +36,11 @@ public static class VillageDAOtoDTOHelper
         return new DAO.Village() {
             Id = originalVillage.Id,
             Name = originalVillage.Name,
-            UserId = originalVillage.UserId
+            UserId = originalVillage.UserId,
+            Golems = originalVillage.Golems,
+            Walls = originalVillage.Walls,
+            Towers = originalVillage.Towers,
+            LastUpdate = originalVillage.LastUpdate
         };
     }
 }

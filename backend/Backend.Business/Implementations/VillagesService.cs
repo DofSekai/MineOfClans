@@ -37,6 +37,26 @@ public class VillagesService : IVillagesService
         }
     }
 
+    public async Task<IEnumerable<Village>> GetAllVillagesByUserId(int id)
+    {
+        try 
+        {
+            List<Village> villages = new List<Village>();
+            await foreach (var village in _villagesDataAccess.GetAllVillagesByUserId(id)) 
+            {
+                villages.Add(village.ToDto());
+            }
+
+            return villages;
+        } 
+        catch (Exception e) 
+        {
+            _logger.LogError(e.Message);
+            _logger.LogError(e.StackTrace);
+            throw;
+        }
+    }
+
     public async Task<Village?> GetById(int id) 
     {
         try 

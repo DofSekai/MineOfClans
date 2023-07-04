@@ -17,9 +17,19 @@ public class VillagesController :  ControllerBase
         
     [HttpGet("")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<IEnumerable<Village>>> GetAllVillagess(CancellationToken cancellationToken = default) 
+    public async Task<ActionResult<IEnumerable<Village>>> GetAllVillages(CancellationToken cancellationToken = default) 
     {
         return Ok(await _villagesService.GetAllVillages(cancellationToken));
+    }
+    
+    [HttpGet("Users/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<Village>> GetAllVillagesByUserId(int id) 
+    {
+        var village = await _villagesService.GetAllVillagesByUserId(id);
+
+        return Ok(village);
     }
         
     [HttpGet("{id}")]

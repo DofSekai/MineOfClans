@@ -18,6 +18,14 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
             .Include(x => x.User)
             .AsAsyncEnumerable();
     }
+    
+    public IAsyncEnumerable<Village> GetAllVillagesByUserId(int id) 
+    {
+        return _databaseContext.Villages
+            .Include(x => x.User)
+            .Where(x=> x.User.Id == id)
+            .AsAsyncEnumerable();
+    }
 
     public async Task<Village?> GetById(int id) 
     {
