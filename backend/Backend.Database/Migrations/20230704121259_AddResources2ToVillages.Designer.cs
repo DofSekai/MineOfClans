@@ -2,6 +2,7 @@
 using Backend.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230704121259_AddResources2ToVillages")]
+    partial class AddResources2ToVillages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,103 +23,6 @@ namespace Backend.Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Backend.Common.DAO.LevelHdv", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("MaxGolems")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MaxTowers")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MaxWalls")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LevelHdvs");
-                });
-
-            modelBuilder.Entity("Backend.Common.DAO.LevelMine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DiamondMaxRate")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("DiamondRate")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EmeraldMaxRate")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EmeraldRate")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IronMaxRate")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IronRate")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LevelMines");
-                });
-
-            modelBuilder.Entity("Backend.Common.DAO.RankupHdv", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Diamonds")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Emeralds")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Irons")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RankupHdvs");
-                });
-
-            modelBuilder.Entity("Backend.Common.DAO.RankupMine", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Diamonds")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Emeralds")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Irons")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RankupMines");
-                });
 
             modelBuilder.Entity("Backend.Common.DAO.User", b =>
                 {

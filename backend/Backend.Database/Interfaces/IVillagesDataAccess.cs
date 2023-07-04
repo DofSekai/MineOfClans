@@ -9,4 +9,5 @@ public interface IVillagesDataAccess
     Task<Village?> GetById(int id);
     Task<IEnumerable<Village>> SearchByName(string name);
     Task Create(Village village);
+    Task Update(int id);
 }

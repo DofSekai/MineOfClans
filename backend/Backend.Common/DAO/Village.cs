@@ -6,6 +6,9 @@
         public string Name { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+        public int Irons { get; set; }
+        public int Diamonds { get; set; }
+        public int Emeralds { get; set; }
         public int Golems { get; set; }
         public int Walls { get; set; }
         public int Towers { get; set; }
