@@ -61,4 +61,29 @@ public class VillagesDatabaseAccess : IVillagesDataAccess
         _databaseContext.Villages.Update(village);
         await _databaseContext.SaveChangesAsync();
     }
+    
+    public async Task UpdateMine(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateHdv(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateGolem(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateWall(int id)
+    {
+        await Update(id);
+    }
+        
+    public async Task UpdateTower(int id)
+    {
+        await Update(id);
+    }
 }
