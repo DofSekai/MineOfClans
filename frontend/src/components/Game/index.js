@@ -73,6 +73,9 @@ export default function Game(){
   const [emerald_rankup_hdv, setEmeraldHdv] = useState('');
   
   useEffect(() => {
+    if(typeof name_village !== 'string' || name_village === '') {
+      return;
+    }
     axios.get(`http://localhost:${config.SWAGGER_PORT}/api/Villages/search/${name_village}`)
     .then(response => {
         setIdVillage(response.data[0].id);   
@@ -209,129 +212,129 @@ export default function Game(){
 
 return(
 
-<section class="bg-gradient-to-tr backdrop-blur-sm font-serif text-white">
+<section className="bg-gradient-to-tr backdrop-blur-sm font-serif text-white">
 
 <br></br>
             <hr></hr>
             <br></br>
             <Link to="/login"><button id="btn_deco" onClick={handleClickDeco}>Déconnexion</button> </Link>
             <Link to={`/city?name=${name}`}><button id="btn_deco">Villages</button> </Link>
-            <div class="flex items-center justify-center">
-              <img src={logo} alt="Logo" class="test"></img>
-            <h1 class="font-bold text-3xl text-green-950">MineOfClans</h1>         
+            <div className="flex items-center justify-center">
+              <img src={logo} alt="Logo" className="test"></img>
+            <h1 className="font-bold text-3xl text-green-950">MineOfClans</h1>         
             </div>
             <br></br>
-            <h1 class="font-bold text-2xl text-green-950">Bienvenue {name} à {name_village} !</h1>   
+            <h1 className="font-bold text-2xl text-green-950">Bienvenue {name} à {name_village} !</h1>   
             <br></br>
             <hr></hr>
             <br></br>
 
-<div id="fond" class="flex h-screen">
-    <div class="w-1/4 h-full border-2 border-white p-4">
-      <h1 class="text-center text-2xl font-bold p-4">MINE</h1>
+<div id="fond" className="flex h-screen">
+    <div className="w-1/4 h-full border-2 border-white p-4">
+      <h1 className="text-center text-2xl font-bold p-4">MINE</h1>
       <br></br>
-      <div class="flex">
-        <img src={iron} class="w-8"></img>
-        <p class="px-4">: {user_irons}</p>
+      <div className="flex">
+        <img src={iron} className="w-8"></img>
+        <p className="px-4">: {user_irons}</p>
       </div>   
       <br></br>
-      <div class="flex">
-        <img src={diamond} class="w-8"></img>
-        <p class="px-4">: {user_diamond}</p>
+      <div className="flex">
+        <img src={diamond} className="w-8"></img>
+        <p className="px-4">: {user_diamond}</p>
       </div>
       <br></br>
-      <div class="flex">
-        <img src={emerauld} class="w-8"></img>
-        <p class="px-4">: {user_emerauld}</p>
+      <div className="flex">
+        <img src={emerauld} className="w-8"></img>
+        <p className="px-4">: {user_emerauld}</p>
       </div>
       <br></br>
       <br></br>
-      <img src={mineButton} onClick={handleClick} alt="mine" class="w-36 h-34 hover:border"></img>
+      <img src={mineButton} onClick={handleClick} alt="mine" className="w-36 h-34 hover:border"></img>
       <p> CLIQUER POUR MINER </p>
 
       <br></br>
       <br></br>
 
       <div>
-          <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center"></img>
-          <div class="flex">
-            <p class="pe-2">Nombre de tours : {user_tour} </p>
+          <img src={sorcier} alt="sorcier" className="w-26 h-40 text-center"></img>
+          <div className="flex">
+            <p className="pe-2">Nombre de tours : {user_tour} </p>
           </div>
       </div>
     </div>
-    <div class="w-1/2 h-screen border-2 border-white p-4 ">
-      <h1 class="text-center text-2xl font-bold p-4">Village</h1>
+    <div className="w-1/2 h-screen border-2 border-white p-4 ">
+      <h1 className="text-center text-2xl font-bold p-4">Village</h1>
       <br></br>
-      <div class="flex h-1/2">
-        <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
+      <div className="flex h-1/2">
+        <div className="border-4 border-white w-1/2 h-72 p-4 text-xl">
             <p>Niveau Mine : {levelMine}</p>
             <br></br>
-            <div id="mine" class="mx-5"><img src={mine} alt="mine" class="w-38 h-36 rounded-3xl"></img></div>
-            <div class="mr-50">
-              <ul class="list-disc ml-8" id="stock_mine">
+            <div id="mine" className="mx-5"><img src={mine} alt="mine" className="w-38 h-36 rounded-3xl"></img></div>
+            <div className="mr-50">
+              <ul className="list-disc ml-8" id="stock_mine">
                 <li>Max fer : {max_irons}</li>
                 <li>Max diamant : {max_diamond} </li>
                 <li>Max émeraude : {max_emerauld} </li>
               </ul>
             </div>
             <br></br>
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={rankupmine_title} onClick={handleClickMine}>
+            <button id="mon-bouton" className="bg-lime-500 text-white rounded-xl p-1 relative" title={rankupmine_title} onClick={handleClickMine}>
               Upgrade</button>
         </div>
-        <div class="border-4 border-white w-1/2 h-72 p-4 text-xl">
+        <div className="border-4 border-white w-1/2 h-72 p-4 text-xl">
             <p>Niveau HDV : {levelHdv} </p>
             <br></br>
-            <div id="hdv" class="mx-5"><img src={hdv} alt="hdv" class="w-36 h-36"></img></div>  
-            <div class="mr-50">
-              <ul class="list-disc ml-8" id="stock_hdv">
+            <div id="hdv" className="mx-5"><img src={hdv} alt="hdv" className="w-36 h-36"></img></div>  
+            <div className="mr-50">
+              <ul className="list-disc ml-8" id="stock_hdv">
                 <li>Max golems : {max_golem}</li>
                 <li>Max murailles : {max_wall}</li>
                 <li>Max tours : {max_tour}</li>
               </ul>
             </div>
             <br></br><br></br>     
-            <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={rankuphdv_title} onClick={handleClickHdv}>
+            <button id="mon-bouton" className="bg-lime-500 text-white rounded-xl p-1 relative" title={rankuphdv_title} onClick={handleClickHdv}>
               Upgrade</button>
         </div>
         
       </div>
-      <div class="border-4 border-white h-72 p-4 text-xl">
+      <div className="border-4 border-white h-72 p-4 text-xl">
         <p>Shop :</p>
-        <div class="image-container">
+        <div className="image-container">
         <div>
-          <img src={golem} alt="golem" class="w-26 h-40 text-center hover:border" onClick={handleClickGolem}></img>
-          <div class="golem-container">
-            <p class="pe-2">600</p><img src={iron} class="w-8"></img>
+          <img src={golem} alt="golem" className="w-26 h-40 text-center hover:border" onClick={handleClickGolem}></img>
+          <div className="golem-container">
+            <p className="pe-2">600</p><img src={iron} className="w-8"></img>
         </div>
         </div>
         <div>
-          <img src={murailles} alt="murailles" class="w-26 h-40 text-center hover:border" onClick={handleClickWall}></img>
-          <div class="murailles-container">
-          <p class="pe-2">50 </p> <img src={diamond} class="w-8"></img>
+          <img src={murailles} alt="murailles" className="w-26 h-40 text-center hover:border" onClick={handleClickWall}></img>
+          <div className="murailles-container">
+          <p className="pe-2">50 </p> <img src={diamond} className="w-8"></img>
           </div>
         </div>
         <div>
-          <img src={sorcier} alt="sorcier" class="w-26 h-40 text-center hover:border" onClick={handleClickTower}></img>
-          <div class="sorcier-container">
-            <p class="pe-2">100</p><img src={emerauld} class="w-8"></img>
+          <img src={sorcier} alt="sorcier" className="w-26 h-40 text-center hover:border" onClick={handleClickTower}></img>
+          <div className="sorcier-container">
+            <p className="pe-2">100</p><img src={emerauld} className="w-8"></img>
         </div>
         </div>
       </div>          
       </div>
     </div>
-    <div class="w-1/4 h- border-2 border-white p-4">
-      <h1 class="text-center text-2xl font-bold p-4">Défense</h1>
+    <div className="w-1/4 h- border-2 border-white p-4">
+      <h1 className="text-center text-2xl font-bold p-4">Défense</h1>
       <br></br>
-      <div class="flex justify-center">
-        <img src={golem} alt="golem" class="w-26 h-52"></img>
+      <div className="flex justify-center">
+        <img src={golem} alt="golem" className="w-26 h-52"></img>
       </div>
       <br></br>
-      <p class="px-4 text-center">Nombre de Golems : {user_golem}</p>
-      <div class="flex justify-center my-10">
-        <img src={murailles} alt="murailles" class="w-26 h-52"></img>
+      <p className="px-4 text-center">Nombre de Golems : {user_golem}</p>
+      <div className="flex justify-center my-10">
+        <img src={murailles} alt="murailles" className="w-26 h-52"></img>
       </div>
       <br></br>
-      <p class="px-4 text-center">Nombre de murailles : {user_wall}</p>
+      <p className="px-4 text-center">Nombre de murailles : {user_wall}</p>
     </div>
   </div>
 </section>   

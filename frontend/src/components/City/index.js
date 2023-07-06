@@ -21,6 +21,9 @@ export default function City(){
     
    
     useEffect(() => {
+        if(typeof name !== 'string' || name === '') {
+          return;
+        }
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/Users/search/${name}`)
         .then(response => {
             setId(response.data[0].id);          
@@ -51,28 +54,28 @@ export default function City(){
 
   return(
   
-  <section class="">
+  <section className="">
   
     <br></br>
     <hr></hr>
     <br></br>
     <Link to="/login"><button id="btn_deco">Déconnexion</button> </Link>
     <Link to={`/registercity?name=${name}`}><button id="btn_deco">Add village</button> </Link>
-    <div class="flex items-center justify-center">
-        <img src={logo} alt="Logo" class="test"></img>
-        <h1 class="font-bold text-3xl">MineOfClans</h1>         
+    <div className="flex items-center justify-center">
+        <img src={logo} alt="Logo" className="test"></img>
+        <h1 className="font-bold text-3xl">MineOfClans</h1>         
     </div>
     <br></br>
-    <h1 class="font-bold text-2xl">Villages de {name} !</h1>   
+    <h1 className="font-bold text-2xl">Villages de {name} !</h1>   
     <br></br>
     <hr></hr>
     <br></br>
-    <div class=" bg-slate-100 rounded-full py-9 flex flex-col justify-center sm:py-12">
-      <div class="grid grid-cols-3 gap-4">      
+    <div className=" bg-slate-100 rounded-full py-9 flex flex-col justify-center sm:py-12">
+      <div className="grid grid-cols-3 gap-4">      
         {citys.map(city => (
-            <div class="flex flex-col items-center">
+            <div key={city.id} className="flex flex-col items-center">
               <a href={`http://localhost:3000/game?name=${name}&village=${city.name}`}><img src={village} className="w-50 h-40" alt="img"/> 
-              <h2 class="text-center mt-2 font-extrabold text-xl">{city.name}</h2></a>
+              <h2 className="text-center mt-2 font-extrabold text-xl">{city.name}</h2></a>
           </div>
         
         ))}
