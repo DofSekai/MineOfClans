@@ -267,7 +267,7 @@ return(
                 <li>Max tours : {max_tour}</li>
               </ul>
             </div>
-            <br></br><br></br>     
+            <br></br><br></br><br></br>   
             <button id="mon-bouton" class="bg-lime-500 text-white rounded-xl p-1 relative" title={rankuphdv_title} onClick={handleClickHdv}>
               Upgrade</button>
         </div>

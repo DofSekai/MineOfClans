@@ -6,6 +6,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Game from './components/Game';
+import Chat from "./components/Chat";
+
+import config from './config.js';
+
+
+// Spinning the http server and the WebSocket server.
 
 const route = createBrowserRouter([
   {
@@ -23,6 +29,10 @@ const route = createBrowserRouter([
   {
     path: "/game",
     element: <Game />
+  },
+  {
+    path: "/chat",
+    element: <Chat />
   }
 ]);
 
