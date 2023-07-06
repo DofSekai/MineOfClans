@@ -1,11 +1,13 @@
 import '../../index.css';
 import createCity from '../../business/createCity.js'; 
 import { BrowserRouter as  Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState,useLocation  } from 'react';
+import { useEffect, useState  } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import config from '../../config.js';
 
 export default function RegisterCity() {
+    const location = useLocation();
     const [pseudo, setPseudo] = useState('');
     const [id_pseudo, setIdPseudo] = useState('');
     const [namecity, setCity] = useState(""); // �tat local pour stocker la valeur de l'input
@@ -17,11 +19,15 @@ export default function RegisterCity() {
       }, [location.search]);
 
     useEffect(() => {
+        if(typeof pseudo !== 'string' || pseudo === '') {
+            return;
+        }
+
         axios.get(`http://localhost:${config.SWAGGER_PORT}/api/Users/search/${pseudo}`)
         .then(response => {
             setIdPseudo(response.data[0].id);          
         });
-    });
+    }, [pseudo]);
 
     function handleInputChange(event) {
         setCity(event.target.value); 
