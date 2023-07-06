@@ -8,7 +8,6 @@ public class Village
     public string Name { get; set; }
     [JsonIgnore]
     public int UserId { get; set; }
-    public User User { get; set; }
     public int Irons { get; set; }
     public int Diamonds { get; set; }
     public int Emeralds { get; set; }
@@ -33,7 +32,6 @@ public static class VillageDAOtoDTOHelper
             Id = originalVillage.Id,
             Name = originalVillage.Name,
             UserId = originalVillage.UserId,
-            User = originalVillage.User.ToDto(),
             Irons = originalVillage.Irons,
             Diamonds = originalVillage.Diamonds,
             Emeralds = originalVillage.Emeralds,

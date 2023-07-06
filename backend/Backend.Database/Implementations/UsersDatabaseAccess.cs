@@ -14,17 +14,26 @@ public class UsersDatabaseAccess : IUsersDataAccess
         
     public IAsyncEnumerable<User> GetAllUsers() 
     {
-        return _databaseContext.Users.AsAsyncEnumerable();
+        return _databaseContext.Users
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .AsAsyncEnumerable();
     }
 
     public async Task<User?> GetById(int id) 
     {
-        return await _databaseContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+        return await _databaseContext.Users
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public Task<IEnumerable<User>> SearchByName(string name) 
     {
-        return Task.FromResult<IEnumerable<User>>(_databaseContext.Users.Where(x => x.Name.Contains(name)));
+        return Task.FromResult<IEnumerable<User>>(_databaseContext.Users
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .Where(x => x.Name.Contains(name)));
     }
 
     public async Task Create(User user) 

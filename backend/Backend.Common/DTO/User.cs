@@ -4,6 +4,12 @@ public class User
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public List<Village> Villages { get; set; }
+    
+    public User()
+    {
+        Villages = new List<Village>();
+    }
 }
     
 public static class UserDAOtoDTOHelper 
@@ -12,7 +18,8 @@ public static class UserDAOtoDTOHelper
     {
         return new DTO.User() {
             Id = originalUser.Id,
-            Name = originalUser.Name
+            Name = originalUser.Name,
+            Villages = originalUser.Villages.Select(x => x.ToDto()).ToList()
         };
     }
 
@@ -20,7 +27,8 @@ public static class UserDAOtoDTOHelper
     {
         return new DAO.User() {
             Id = originalUser.Id,
-            Name = originalUser.Name
+            Name = originalUser.Name,
+            Villages = originalUser.Villages.Select(x => x.ToDAO()).ToList()
         };
     }
 }
