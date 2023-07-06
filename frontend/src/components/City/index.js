@@ -37,7 +37,6 @@ export default function City(){
 
         async function fetchCity() {
           try {
-            console.log(id);
             const fetchedCitys = await getCity(
                 id
             );
