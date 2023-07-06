@@ -1,12 +1,12 @@
 using Backend.Common.DTO;
 
-namespace Backend.Business.Interfaces
-{
-    public interface IUsersService {
-        Task<IEnumerable<User>> GetAllUsers(CancellationToken cancellationToken);
-        Task<User?> GetById(int id);
-        Task<IEnumerable<User>> SearchByName(string name);
-        Task<User> Create(UserCreationRequest user);
-        Task<IEnumerable<User>> GetRanking(CancellationToken cancellationToken);
-    }
+namespace Backend.Business.Interfaces;
+
+public interface IUsersService {
+    Task<IEnumerable<User>> GetAllUsers(CancellationToken cancellationToken);
+    Task<User?> GetById(int id);
+    Task<IEnumerable<User>> SearchByName(string name);
+    Task<User> Create(UserCreationRequest user);
+    Task Update(int id);
+    Task<IEnumerable<User>> GetRanking(CancellationToken cancellationToken);
 }

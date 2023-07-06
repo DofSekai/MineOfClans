@@ -2,194 +2,209 @@ using Backend.Business.Interfaces;
 using Backend.Common.DTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Backend.Controllers
+namespace Backend.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class VillagesController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class VillagesController : ControllerBase
+    private readonly IVillagesService _villagesService;
+
+    public VillagesController(IVillagesService villagesService)
     {
-        private readonly IVillagesService _villagesService;
+        _villagesService = villagesService;
+    }
 
-        public VillagesController(IVillagesService villagesService)
+    [HttpGet("")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<Village>>> GetAllVillages(CancellationToken cancellationToken = default)
+    {
+        return Ok(await _villagesService.GetAllVillages(cancellationToken));
+    }
+
+    [HttpGet("Users/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<Village>> GetAllVillagesByUserId(int id)
+    {
+        var village = await _villagesService.GetAllVillagesByUserId(id);
+
+        return Ok(village);
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<Village>> GetById(int id)
+    {
+        var village = await _villagesService.GetById(id);
+
+        if (village is null)
         {
-            _villagesService = villagesService;
+            return NoContent();
         }
 
-        [HttpGet("")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Village>>> GetAllVillages(
-            CancellationToken cancellationToken = default)
+        return Ok(village);
+    }
+
+    [HttpGet("search/{name}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<Village>>> SearchByName(string name)
+    {
+        return Ok(await _villagesService.SearchByName(name));
+    }
+
+    [HttpPost("")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> Create(VillageCreationRequest villageRequest)
+    {
+        try
         {
-            return Ok(await _villagesService.GetAllVillages(cancellationToken));
+            var village = await _villagesService.Create(villageRequest);
+            return Created($"/api/{village.Id}", village);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> Update(int id)
+    {
+        var village = await _villagesService.GetById(id);
+
+        if (village is null)
+        {
+            return NotFound();
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult<Village>> GetById(int id)
+        try
         {
-            var village = await _villagesService.GetById(id);
+            await _villagesService.Update(village.Id);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 
-            if (village is null)
-            {
-                return NoContent();
-            }
+    [HttpPut("{id}/mine")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> UpdateMine(int id)
+    {
+        var village = await _villagesService.GetById(id);
 
-            return Ok(village);
+        if (village is null)
+        {
+            return NotFound();
         }
 
-        [HttpPost("")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Create(Village village)
+        try
         {
-            try
-            {
-                await _villagesService.Create(village);
-                return Created($"/api/{village.Id}", village);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _villagesService.UpdateMine(village.Id);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("{id}/hdv")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> UpdateHdv(int id)
+    {
+        var village = await _villagesService.GetById(id);
+
+        if (village is null)
+        {
+            return NotFound();
         }
 
-        [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Update(int id)
+        try
         {
-            var village = await _villagesService.GetById(id);
+            await _villagesService.UpdateHdv(village.Id);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 
-            if (village is null)
-            {
-                return NotFound();
-            }
+    [HttpPut("{id}/golem")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> UpdateGolem(int id)
+    {
+        var village = await _villagesService.GetById(id);
 
-            try
-            {
-                await _villagesService.Update(village.Id);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        if (village is null)
+        {
+            return NotFound();
         }
 
-        [HttpPut("{id}/mine")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateMine(int id)
+        try
         {
-            var village = await _villagesService.GetById(id);
-
-            if (village is null)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                await _villagesService.UpdateMine(village.Id);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _villagesService.UpdateGolem(village.Id);
+            return NoContent();
         }
-        
-        [HttpPut("{id}/hdv")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateHdv(int id)
+        catch (ArgumentException ex)
         {
-            var village = await _villagesService.GetById(id);
-
-            if (village is null)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                await _villagesService.UpdateHdv(village.Id);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
         }
-        
-        [HttpPut("{id}/golem")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateGolem(int id)
+    }
+
+    [HttpPut("{id}/wall")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> UpdateWall(int id)
+    {
+        var village = await _villagesService.GetById(id);
+
+        if (village is null)
         {
-            var village = await _villagesService.GetById(id);
-
-            if (village is null)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                await _villagesService.UpdateGolem(village.Id);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return NotFound();
         }
-        
-        [HttpPut("{id}/wall")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateWall(int id)
+
+        try
         {
-            var village = await _villagesService.GetById(id);
-
-            if (village is null)
-            {
-                return NotFound();
-            }
-
-            try
-            {
-                await _villagesService.UpdateWall(village.Id);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            await _villagesService.UpdateWall(village.Id);
+            return NoContent();
         }
-        
-        [HttpPut("{id}/tower")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> UpdateTower(int id)
+        catch (ArgumentException ex)
         {
-            var village = await _villagesService.GetById(id);
+            return BadRequest(ex.Message);
+        }
+    }
 
-            if (village is null)
-            {
-                return NotFound();
-            }
+    [HttpPut("{id}/tower")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> UpdateTower(int id)
+    {
+        var village = await _villagesService.GetById(id);
 
-            try
-            {
-                await _villagesService.UpdateTower(village.Id);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        if (village is null)
+        {
+            return NotFound();
+        }
+
+        try
+        {
+            await _villagesService.UpdateTower(village.Id);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
         }
     }
 }

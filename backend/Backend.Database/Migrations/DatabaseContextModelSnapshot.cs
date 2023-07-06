@@ -40,7 +40,7 @@ namespace Backend.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("levelHdvs");
+                    b.ToTable("LevelHdvs");
                 });
 
             modelBuilder.Entity("Backend.Common.DAO.LevelMine", b =>
@@ -71,7 +71,7 @@ namespace Backend.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("levelMines");
+                    b.ToTable("LevelMines");
                 });
 
             modelBuilder.Entity("Backend.Common.DAO.RankupHdv", b =>
@@ -93,7 +93,7 @@ namespace Backend.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("rankupHdvs");
+                    b.ToTable("RankupHdvs");
                 });
 
             modelBuilder.Entity("Backend.Common.DAO.RankupMine", b =>
@@ -115,7 +115,7 @@ namespace Backend.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("rankupMines");
+                    b.ToTable("RankupMines");
                 });
 
             modelBuilder.Entity("Backend.Common.DAO.User", b =>
@@ -132,17 +132,14 @@ namespace Backend.Database.Migrations
                         .IsUnicode(true)
                         .HasColumnType("varchar");
 
-                    b.Property<int>("VillageId")
-                        .HasColumnType("integer");
+                    b.Property<int>("Score")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.HasIndex("VillageId");
-
-                    b.ToTable("users");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Backend.Common.DAO.Village", b =>
@@ -182,10 +179,19 @@ namespace Backend.Database.Migrations
                     b.Property<int>("LevelMineId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .IsUnicode(true)
+                        .HasColumnType("varchar");
+
                     b.Property<int>("Towers")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("Walls")
                         .ValueGeneratedOnAdd()
@@ -198,18 +204,9 @@ namespace Backend.Database.Migrations
 
                     b.HasIndex("LevelMineId");
 
-                    b.ToTable("villages");
-                });
+                    b.HasIndex("UserId");
 
-            modelBuilder.Entity("Backend.Common.DAO.User", b =>
-                {
-                    b.HasOne("Backend.Common.DAO.Village", "Village")
-                        .WithMany()
-                        .HasForeignKey("VillageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Village");
+                    b.ToTable("Villages");
                 });
 
             modelBuilder.Entity("Backend.Common.DAO.Village", b =>
@@ -226,9 +223,22 @@ namespace Backend.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Backend.Common.DAO.User", "User")
+                        .WithMany("Villages")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("LevelHdv");
 
                     b.Navigation("LevelMine");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Backend.Common.DAO.User", b =>
+                {
+                    b.Navigation("Villages");
                 });
 #pragma warning restore 612, 618
         }

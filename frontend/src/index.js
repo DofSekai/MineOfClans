@@ -6,12 +6,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Game from './components/Game';
+
 import Chat from "./components/Chat";
 
-import config from './config.js';
 
-
-// Spinning the http server and the WebSocket server.
+import City from './components/City';
+import RegisterCity from './components/RegisterCity';
 
 const route = createBrowserRouter([
   {
@@ -33,13 +33,20 @@ const route = createBrowserRouter([
   {
     path: "/chat",
     element: <Chat />
+  },
+  {
+    path: "/city",
+    element: <City />
+  },
+  {
+    path: "/registercity",
+    element: <RegisterCity />
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <RouterProvider router={route} />
-  </React.StrictMode>
+
 );
 
 

@@ -1,8 +1,8 @@
-using Backend.Common.DTO;
+﻿using Backend.Common.DTO;
 
-namespace Backend.Business.Interfaces
+namespace Backend.Business.Interfaces;
+
+public interface IRankupMinesService
 {
-    public interface IRankupMinesService {
-        Task<RankupMine?> GetById(int id);
-    }
+    Task<RankupMine?> GetById(int id);
 }

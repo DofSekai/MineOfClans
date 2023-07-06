@@ -68,6 +68,8 @@ class Chat extends Component {
           <button class="bg-green-500*
           " type="submit">Envoyer</button>
         </form>
+        <br></br>
+        <Link to={`/`}><button id="btn_deco">Menu</button> </Link>
       </div>
     );
   }

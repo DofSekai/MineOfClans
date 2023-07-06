@@ -2,45 +2,59 @@ using Backend.Common.DAO;
 using Backend.Database.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Database.Implementations {
-    public class UsersDatabaseAccess : IUsersDataAccess {
-        private readonly DatabaseContext _databaseContext;
-        public UsersDatabaseAccess(DatabaseContext databaseContext) {
-            _databaseContext = databaseContext;
-        }
+namespace Backend.Database.Implementations;
+
+public class UsersDatabaseAccess : IUsersDataAccess 
+{
+    private readonly DatabaseContext _databaseContext;
+    public UsersDatabaseAccess(DatabaseContext databaseContext) 
+    {
+        _databaseContext = databaseContext;
+    }
         
-        public IAsyncEnumerable<User> GetAllUsers() {
-            return _databaseContext.users
-                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
-                .Include(x => x.Village).ThenInclude(x => x.LevelHdv)
-                .AsAsyncEnumerable();
-        }
+    public IAsyncEnumerable<User> GetAllUsers() 
+    {
+        return _databaseContext.Users
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .AsAsyncEnumerable();
+    }
 
-        public async Task<User?> GetById(int id) {
-            return await _databaseContext.users
-                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
-                .Include(x => x.Village).ThenInclude(x => x.LevelHdv)
-                .FirstOrDefaultAsync(x => x.Id == id);
-        }
+    public async Task<User?> GetById(int id) 
+    {
+        return await _databaseContext.Users
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .FirstOrDefaultAsync(x => x.Id == id);
+    }
 
-        public async Task<IEnumerable<User>> SearchByName(string name) {
-            return _databaseContext.users
-                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
-                .Include(x => x.Village).ThenInclude(x => x.LevelHdv)
-                .Where(x => x.Name.Contains(name));
-        }
+    public Task<IEnumerable<User>> SearchByName(string name) 
+    {
+        return Task.FromResult<IEnumerable<User>>(_databaseContext.Users
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .Where(x => x.Name.Contains(name)));
+    }
 
-        public async Task Create(User user) {
-            _databaseContext.users.Add(user);
-            await _databaseContext.SaveChangesAsync();
-        }
-        
-        public IAsyncEnumerable<User> GetRanking() {
-            return _databaseContext.users
-                .OrderByDescending(x=> x.Village.LevelHdvId).ThenBy(x => x.Id)
-                .Include(x => x.Village).ThenInclude(x => x.LevelMine)
-                .Include(x => x.Village).ThenInclude(x => x.LevelHdv)
-                .AsAsyncEnumerable();
-        }
+    public async Task Create(User user) 
+    {
+        _databaseContext.Users.Add(user);
+        await _databaseContext.SaveChangesAsync();
+    }
+
+    public async Task Update(int id)
+    {
+        var user = await GetById(id);
+        _databaseContext.Users.Update(user);
+        await _databaseContext.SaveChangesAsync();
+    }
+    
+    public IAsyncEnumerable<User> GetRanking()
+    {
+        return _databaseContext.Users
+            .OrderByDescending(x => x.Score).ThenBy(x => x.Id)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .AsAsyncEnumerable();
     }
 }

@@ -1,8 +1,8 @@
-using Backend.Common.DTO;
+﻿using Backend.Common.DTO;
 
-namespace Backend.Business.Interfaces
+namespace Backend.Business.Interfaces;
+
+public interface IRankupHdvsService
 {
-    public interface IRankupHdvsService {
-        Task<RankupHdv?> GetById(int id);
-    }
+    Task<RankupHdv?> GetById(int id);
 }

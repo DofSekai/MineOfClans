@@ -52,15 +52,14 @@ export default function Login() {
             <br></br>
             <hr></hr>
             <br></br>
-            <div class=" bg-slate-100 rounded-full py-9 flex flex-col justify-center sm:py-12">
-                <div class="grid grid-cols-3 gap-4">
+            <div className=" bg-slate-100 rounded-full py-9 flex flex-col justify-center sm:py-12">
+                <div className="grid grid-cols-3 gap-4">
                    
                         {users.map(user => (
-                             <div class="flex flex-col items-center">
-                                <a href={`http://localhost:3000/game?name=${encodeURIComponent(user.name)}`}> <RandomChoiceComponent />
-                                <h3 class="text-center mt-2">{user.name}</h3></a>
+                             <div key={user.id} className="flex flex-col items-center">
+                                <a href={`http://localhost:3000/city?name=${encodeURIComponent(user.name)}`}> <RandomChoiceComponent />
+                                <h3 className="text-center mt-2">{user.name}</h3></a>
                             </div>
-                           
                         ))}
                 </div>
             </div>

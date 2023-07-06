@@ -1,10 +1,10 @@
-using Backend.Common.DTO;
+﻿using Backend.Common.DTO;
 
-namespace Backend.Business.Interfaces
+namespace Backend.Business.Interfaces;
+
+public interface ILevelMinesService
 {
-    public interface ILevelMinesService {
-        Task<IEnumerable<LevelMine>> GetAllLevelMines(CancellationToken cancellationToken);
-        Task<LevelMine?> GetById(int id);
-        Task Create(LevelMine levelMine);
-    }
+    Task<IEnumerable<LevelMine>> GetAllLevelMines(CancellationToken cancellationToken);
+    Task<LevelMine?> GetById(int id);
+    Task Create(LevelMine levelMine);
 }
