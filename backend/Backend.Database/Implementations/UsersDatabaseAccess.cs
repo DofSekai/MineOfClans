@@ -41,4 +41,20 @@ public class UsersDatabaseAccess : IUsersDataAccess
         _databaseContext.Users.Add(user);
         await _databaseContext.SaveChangesAsync();
     }
+
+    public async Task Update(int id)
+    {
+        var user = await GetById(id);
+        _databaseContext.Users.Update(user);
+        await _databaseContext.SaveChangesAsync();
+    }
+    
+    public IAsyncEnumerable<User> GetRanking()
+    {
+        return _databaseContext.Users
+            .OrderByDescending(x => x.Score).ThenBy(x => x.Id)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelMine)
+            .Include(x => x.Villages).ThenInclude(x => x.LevelHdv)
+            .AsAsyncEnumerable();
+    }
 }

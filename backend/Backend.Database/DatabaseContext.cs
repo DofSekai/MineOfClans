@@ -36,6 +36,8 @@ public class DatabaseContext : DbContext
             .HasMaxLength(255)
             .IsUnicode(true)
             .HasColumnType("varchar");
+        userBuilder.Property(x => x.Score).HasColumnType("integer")
+            .HasDefaultValue(1);
         userBuilder.HasMany(x => x.Villages)
             .WithOne(x => x.User);
             

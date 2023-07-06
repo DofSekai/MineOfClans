@@ -7,4 +7,6 @@ public interface IUsersService {
     Task<User?> GetById(int id);
     Task<IEnumerable<User>> SearchByName(string name);
     Task<User> Create(UserCreationRequest user);
+    Task Update(int id);
+    Task<IEnumerable<User>> GetRanking(CancellationToken cancellationToken);
 }

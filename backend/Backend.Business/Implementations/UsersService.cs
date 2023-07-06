@@ -99,4 +99,50 @@ public class UsersService : IUsersService
             throw;
         }
     }
+
+    public async Task Update(int id)
+    {
+
+        var user = await _usersDataAccess.GetById(id);
+
+        var score = user.Villages.Sum(v => v.LevelHdvId)
+                    + user.Villages.Sum(v => v.LevelMineId)
+                    + user.Villages.Sum(v => v.Irons)
+                    + user.Villages.Sum(v => v.Diamonds)
+                    + user.Villages.Sum(v => v.Emeralds)
+                    + user.Villages.Sum(v => v.Golems)
+                    + user.Villages.Sum(v => v.Walls)
+                    + user.Villages.Sum(v => v.Towers);
+
+        user.Score = score;
+
+        await _usersDataAccess.Update(user.Id);
+    }
+
+    public async Task<IEnumerable<User>> GetRanking(CancellationToken cancellationToken)
+    {
+        try 
+        {
+            foreach (var userUpdate in await _usersDataAccess.GetAllUsers().ToListAsync(cancellationToken)) 
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                await Update(userUpdate.Id);
+            }
+            
+            List<User> users = new List<User>();
+            await foreach (var user in _usersDataAccess.GetRanking()) 
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                users.Add(user.ToDto());
+            }
+
+            return users;
+        } 
+        catch (Exception e) 
+        {
+            _logger.LogError(e.Message);
+            _logger.LogError(e.StackTrace);
+            throw;
+        }
+    }
 }

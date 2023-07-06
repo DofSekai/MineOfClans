@@ -59,4 +59,34 @@ public class UsersController :  ControllerBase
             return BadRequest(ex.Message);
         }
     }
+    
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> Update(int id)
+    {
+        var user = await _usersService.GetById(id);
+
+        if (user is null)
+        {
+            return NotFound();
+        }
+        
+        try
+        {
+            await _usersService.Update(id);
+            return NoContent();
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+    
+    [HttpGet("ranking")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<User>>> GetRanking(CancellationToken cancellationToken = default)
+    {
+        return Ok(await _usersService.GetRanking(cancellationToken));
+    }
 }
