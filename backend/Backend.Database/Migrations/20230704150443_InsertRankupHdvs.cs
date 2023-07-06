@@ -11,8 +11,10 @@ namespace Backend.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("INSERT INTO \"RankupHdvs\"(\"Irons\", \"Diamonds\", \"Emeralds\") VALUES(800, 400, 100)");
-            migrationBuilder.Sql("INSERT INTO \"RankupHdvs\"(\"Irons\", \"Diamonds\", \"Emeralds\") VALUES(331530, 165760, 41440)");
-            migrationBuilder.Sql("INSERT INTO \"RankupHdvs\"(\"Irons\", \"Diamonds\", \"Emeralds\") VALUES(7268490, 3634240, 908560)");
+            migrationBuilder.Sql("INSERT INTO \"RankupHdvs\"(\"Irons\", \"Diamonds\", \"Emeralds\") VALUES(9000, 5000, 1000)");
+            migrationBuilder.Sql("INSERT INTO \"RankupHdvs\"(\"Irons\", \"Diamonds\", \"Emeralds\") VALUES(35000, 20000, 10000)");
+            migrationBuilder.Sql("INSERT INTO \"RankupHdvs\"(\"Irons\", \"Diamonds\", \"Emeralds\") VALUES(50000, 50000, 30000)");
+            migrationBuilder.Sql("INSERT INTO \"RankupHdvs\"(\"Irons\", \"Diamonds\", \"Emeralds\") VALUES(200000, 100000, 99000)");
         }
 
         /// <inheritdoc />
